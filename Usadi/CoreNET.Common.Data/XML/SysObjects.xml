@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="SysObjects" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="SysObjects" type="CoreNET.Common.BO.SysObjects" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="result-param" class="SysObjects">
+      <result property="TableName" column="TABLENAME"/>
+      <result property="ColumnName" column="COLUMNNAME"/>
+      <result property="TypeName" column="TYPENAME"/>
+      <result property="Length" column="LENGTH"/>
+      <result property="IsNullable" column="ISNULLABLE"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="QueryByAllSysObjects" parameterClass="SysObjects" resultMap="result-param">
+      select upper(replace(O.NAME,'_','')) as TABLENAME,
+      upper(replace(C.NAME,'_','')) as COLUMNNAME,
+      T.NAME as TYPENAME,C.PREC as LENGTH,C.ISNULLABLE
+      from sysobjects O
+      left join syscolumns C  on O.ID=C.ID
+      left join systypes T    on C.XTYPE=T.XTYPE
+      where 1=1
+      and T.NAME in ('char','nchar','varchar','nvarchar')
+      and O.NAME not like '%sys%'
+      and O.NAME not like '%tracking%'
+      and O.NAME not like '%bulktype%'
+      and C.NAME not like '%@%'
+    </select>
+    <select id="LoadByPKSysObjects" parameterClass="SysObjects" resultMap="result-param">
+      select O.NAME as TABLENAME,C.NAME as COLUMNNAME,T.NAME as TYPENAME,C.LENGTH,C.ISNULLABLE
+      from sysobjects O
+      left join syscolumns C  on O.ID=C.ID
+      left join systypes T    on C.XTYPE=T.XTYPE
+      where upper(replace(O.NAME,'_','')) = upper(#TableName#)
+      and   upper(replace(C.NAME,'_','')) = upper(#ColumnName#)
+      and   T.NAME in ('char','varchar','nvarchar')
+    </select>
+  </statements>
+
+  <parameterMaps>
+    <parameterMap id="select-param" class="SysObjects">
+      <parameter property="TableName" column="TableName"/>
+    </parameterMap>
+  </parameterMaps>
+
+</sqlMap>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ssapp" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ssapp" type="CoreNET.Common.BO.SsappControl, CoreNET.Common.Data" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ssapp">
+        <result property="Url" column="URL"/>
+        <result property="UrlFull" column="URLFULL"/>
+        <result property="Nmapp" column="NMAPP"/>
+        <result property="Urapp" column="URAPP"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Kdapp" column="KDAPP"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <select id="BaseQuerySsapp" parameterClass="Ssapp" resultMap="return-result">
+        select rtrim(S.KDAPP) as KDAPP,rtrim(S.NMAPP) as NMAPP,rtrim(S.URAPP) as URAPP
+        ,rtrim(S.URL) as URL
+        ,case S.URL when '' then '' else rtrim(S.URL)+'&amp;kdapp='+rtrim(S.KDAPP) end as URLFULL,
+        rtrim(S.IDAPP) as IDAPP,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APP S
+      </select>
+      <select id="QueryByAllSsapp" extends="BaseQuerySsapp" parameterClass="Ssapp" resultMap="return-result">
+        where 1=1
+        and
+        (
+          (isnull(#Kdapp#,'')='')
+          or
+          (left(S.KDAPP,2)=left(#Kdapp#,2) and (len(rtrim(S.KDAPP))=3))
+          or
+          (left(S.KDAPP,len(#Kdapp#))=left(#Kdapp#,len(#Kdapp#)))
+        )
+        order by S.KDAPP
+      </select>
+      <select id="QueryByLookupSsapp" extends="BaseQuerySsapp" parameterClass="Ssapp" resultMap="return-result">
+        where 1=1
+      </select>
+      <select id="LoadByPKSsapp" extends="BaseQuerySsapp" parameterClass="Ssapp" resultMap="return-result">
+        where S.KDAPP = #Kdapp#
+      </select>
+      <select id="LoadByIDSsapp" extends="BaseQuerySsapp" parameterClass="Ssapp" resultMap="return-result">
+        where S.IDAPP = #Idapp#
+      </select>
+    </statements>
+    <parameterMaps>
+    </parameterMaps>
+</sqlMap>
+

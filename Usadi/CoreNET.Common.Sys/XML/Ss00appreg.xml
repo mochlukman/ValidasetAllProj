@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appreg" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss00appreg" type="CoreNET.Common.BO.Ss00appregControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss00appreg">
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Nama" column="NAMA"/>
+        <result property="Nowa" column="NOWA"/>
+        <result property="Nohp" column="NOHP"/>
+        <result property="Email" column="EMAIL"/>
+        <result property="Clip" column="CLIP"/>
+        <result property="Clcomp" column="CLCOMP"/>
+        <result property="Clalamat" column="CLALAMAT"/>
+        <result property="Csid" column="CSID"/>
+        <result property="Cskey" column="CSKEY"/>
+        <result property="Csserver" column="CSSERVER"/>
+        <result property="Csdb" column="CSDB"/>
+        <result property="Csuser" column="CSUSER"/>
+        <result property="Cspwd" column="CSPWD"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idreg" column="IDREG"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs00appreg" parameterMap="insert-param">
+        <generate table="Ss00appreg"/>
+      </insert>
+      <update id="UpdateBySs00appreg" parameterMap="update-param">
+        <generate table="Ss00appreg" by="IDREG"/>
+      </update>
+      <update id="UpdateByValidRevSs00appreg" parameterClass="Ss00appreg">
+        update SS00APPREG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs00appreg" parameterClass="Ss00appreg">
+        update SS00APPREG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs00appreg" parameterMap="delete-param">
+        <generate table="Ss00appreg" by="IDREG"/>
+      </delete>
+      <select id="BaseQuerySs00appreg" parameterClass="Ss00appreg" resultMap="return-result">
+        select rtrim(S.IDREG) as IDREG,rtrim(S.IDAPP) as IDAPP,rtrim(S.NAMA) as NAMA,rtrim(S.NOWA) as NOWA,
+        rtrim(S.NOHP) as NOHP,rtrim(S.EMAIL) as EMAIL,
+        rtrim(S.CSKEY) as CSKEY,rtrim(S.CSID) as CSID,rtrim(S.CLIP) as CLIP,rtrim(S.CLCOMP) as CLCOMP,rtrim(S.CLALAMAT) as CLALAMAT,
+        rtrim(S.CSSERVER) as CSSERVER,rtrim(S.CSDB) as CSDB,rtrim(S.CSUSER) as CSUSER,rtrim(S.CSPWD) as CSPWD,S.STATUS,
+        rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPREG S
+      </select>
+      <select id="QueryByAllSs00appreg" extends="BaseQuerySs00appreg" parameterClass="Ss00appreg" resultMap="return-result">
+        where 1=1
+        order by S.IDREG
+      </select>
+      <select id="QueryByLookupSs00appreg" extends="BaseQuerySs00appreg" parameterClass="Ss00appreg" resultMap="return-result">
+        where 1=1
+        order by S.IDREG
+      </select>
+      <select id="LoadByPKSs00appreg" extends="BaseQuerySs00appreg" parameterClass="Ss00appreg" resultMap="return-result">
+        where S.IDREG = #Idreg#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss00appreg">
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Nama" column="NAMA"/>
+        <parameter property="Nowa" column="NOWA"/>
+        <parameter property="Nohp" column="NOHP"/>
+        <parameter property="Email" column="EMAIL"/>
+        <parameter property="Csid" column="CSID"/>
+        <parameter property="Cskey" column="CSKEY"/>
+        <parameter property="Clip" column="CLIP"/>
+        <parameter property="Clcomp" column="CLCOMP"/>
+        <parameter property="Clalamat" column="CLALAMAT"/>
+        <parameter property="Csserver" column="CSSERVER"/>
+        <parameter property="Csdb" column="CSDB"/>
+        <parameter property="Csuser" column="CSUSER"/>
+        <parameter property="Cspwd" column="CSPWD"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idreg" column="IDREG"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss00appreg">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss00appreg">
+        <parameter property="Idreg" column="IDREG"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

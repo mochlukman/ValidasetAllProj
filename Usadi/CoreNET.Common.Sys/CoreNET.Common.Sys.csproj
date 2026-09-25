@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97EE96DA-4AF7-46F4-B077-5FE3B73A4BDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoreNET.Common.BO</RootNamespace>
+    <AssemblyName>CoreNET.Common.Sys</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseDataControlSys.cs" />
+    <Compile Include="Base\ExtIcon.cs" />
+    <Compile Include="Base\Ss01appmenuAppLookup.cs" />
+    <Compile Include="Base\Ss01appmenuStatis.cs" />
+    <Compile Include="Base\Ssuserapp.cs" />
+    <Compile Include="Dashboard\DashboardUtils.cs" />
+    <Compile Include="Dashboard\Helper\DashboardHelper.cs" />
+    <Compile Include="DM\Dmpemda.cs" />
+    <Compile Include="DM\DmpemdaForm.cs" />
+    <Compile Include="DM\DmpemdaLookup.cs" />
+    <Compile Include="SS00\Ss00appissue.cs" />
+    <Compile Include="SS00\Ss00appissueLookup.cs" />
+    <Compile Include="SS00\Ss00appLinkConfig.cs" />
+    <Compile Include="SS00\Ss00appLinkDebug.cs" />
+    <Compile Include="SS00\Ss00appLinkKkp.cs" />
+    <Compile Include="SS00\Ss00appLinkMenu.cs" />
+    <Compile Include="SS00\Ss00appmenuMapClass.cs" />
+    <Compile Include="SS00\Ss00appmenuSetURL.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appEditMenu.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appEditRegUser.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appEditUser.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appEditKkp.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuAdmin.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appEditConfig.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appFile.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appHelp.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appMsg.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appMon.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuEditConfig.cs" />
+    <Compile Include="SS01\Ss01appmenuAdmin.cs" />
+    <Compile Include="SS01\Ss01appmenuEditVersi.cs" />
+    <Compile Include="SS01\Ss01appmenuEditKey.cs" />
+    <Compile Include="SS01\Ss01appmenuEditTree.cs" />
+    <Compile Include="SS01\Ss01appmenuEditGrid.cs" />
+    <Compile Include="SS01\Ss01appmenuEditForm.cs" />
+    <Compile Include="SS01\Ss01appmenuEditFilter.cs" />
+    <Compile Include="SS01\Ss01appmenuFilter.cs" />
+    <Compile Include="SS01\Ss01appmenukkp.cs" />
+    <Compile Include="SS00\Ss00appkkp\Ss00appkkp.cs" />
+    <Compile Include="Base\BaseDataControlMenu.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfig.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfigLookup.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfigpar.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfigparLookup.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfigReg.cs" />
+    <Compile Include="SS00\Ss00appconfig\Ss00appconfigUI.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appLink.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuReg.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appNew.cs" />
+    <Compile Include="SS01\Ss01appmenuDebug.cs" />
+    <Compile Include="SS01\Ss01appmenuApp.cs" />
+    <Compile Include="SS01\Ss01appmenuMon.cs" />
+    <Compile Include="SS01\Ss01appmenuEditConfig.cs" />
+    <Compile Include="Base\Ss01appmenuTahun.cs" />
+    <Compile Include="SS01\Ss01appmenuRegForum.cs" />
+    <Compile Include="SS01\Ss01appmenuRegFile.cs" />
+    <Compile Include="SS01\Ss01appmenuRegHelp.cs" />
+    <Compile Include="SS10\Ss10userappByUser.cs" />
+    <Compile Include="SS10\Ss10userByUserTypeAdmin.cs" />
+    <Compile Include="SS10\Ss10userByUserType.cs" />
+    <Compile Include="SS10\Ss10userLookup.cs" />
+    <Compile Include="Base\SysUtils.cs" />
+    <Compile Include="Base\ConstantTablesSys.cs" />
+    <Compile Include="DM\DmbulanUI.cs" />
+    <Compile Include="DM\Dmdok.cs" />
+    <Compile Include="DM\DmdokLookup.cs" />
+    <Compile Include="DM\DmlevelUI.cs" />
+    <Compile Include="DM\DmlevelUILookup.cs" />
+    <Compile Include="DM\DmstatusUI.cs" />
+    <Compile Include="DM\DmtahunUI.cs" />
+    <Compile Include="DM\DmtahunUILookup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Base\Ss10userLogin.cs" />
+    <Compile Include="Rpt00\Rpt00datavol.cs" />
+    <Compile Include="Rpt00\Rpt00datavolLookup.cs" />
+    <Compile Include="SS00\Ss00app\Ss00app.cs" />
+    <Compile Include="SS00\Ss00app\Ss00appLookup.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenu.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuconfig.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuconfigLookup.cs" />
+    <Compile Include="SS00\Ss00appmenu\Ss00appmenuLookup.cs" />
+    <Compile Include="SS00\Ss00appreg\Ss00appreg.cs" />
+    <Compile Include="SS00\Ss00appreg\Ss00appregconfig.cs" />
+    <Compile Include="SS00\Ss00appreg\Ss00appregconfigLookup.cs" />
+    <Compile Include="SS00\Ss00appreg\Ss00appregLookup.cs" />
+    <Compile Include="SS00\Ss00appversi\Ss00appversi.cs" />
+    <Compile Include="SS00\Ss00appversi\Ss00appversiconfig.cs" />
+    <Compile Include="SS00\Ss00appversi\Ss00appversiconfigLookup.cs" />
+    <Compile Include="SS00\Ss00appversi\Ss00appversiLookup.cs" />
+    <Compile Include="SS01\Ss01appmenu.cs" />
+    <Compile Include="SS01\Ss01appmenuconfig.cs" />
+    <Compile Include="SS01\Ss01appmenuconfigLookup.cs" />
+    <Compile Include="SS01\Ss01appmenuLookup.cs" />
+    <Compile Include="SS01\Ss01appmenuReg.cs" />
+    <Compile Include="SS10\Ss10user.cs" />
+    <Compile Include="SS10\Ss10userapp.cs" />
+    <Compile Include="SS10\Ss10userappLookup.cs" />
+    <Compile Include="SS10\Ss10usermenu.cs" />
+    <Compile Include="SS10\Ss10usertypes.cs" />
+    <Compile Include="SS10\Ss10usertypesLookup.cs" />
+    <Compile Include="SS11\Ss11userol.cs" />
+    <Compile Include="SS11\Ss11userolLookup.cs" />
+    <Compile Include="SS20\Ss20group.cs" />
+    <Compile Include="SS20\Ss20groupApp.cs" />
+    <Compile Include="SS20\Ss20groupconfig.cs" />
+    <Compile Include="SS20\Ss20groupconfigLookup.cs" />
+    <Compile Include="SS20\Ss20groupLookup.cs" />
+    <Compile Include="SS20\Ss20groupmenu.cs" />
+    <Compile Include="SS20\Ss20groupmenuLookup.cs" />
+    <Compile Include="SS20\Ss20groupmenuLookupForSelf.cs" />
+    <Compile Include="SS20\Ss20groupuser.cs" />
+    <Compile Include="SS20\Ss20groupuserLookupForSelf.cs" />
+    <Compile Include="SS90\Ss90dictionary.cs" />
+    <Compile Include="Sys\SsappmenuAllIdmenuLookup.cs" />
+    <Compile Include="Sys\SsappmenuAllOlist1Lookup.cs" />
+    <Compile Include="Sys\SsappmenuconfigAll.cs" />
+    <Compile Include="Sys\SysgetcolsUI.cs" />
+    <Compile Include="Sys\SysgetfiltersUI.cs" />
+    <Compile Include="Sys\SysgetkeysUI.cs" />
+    <Compile Include="Sys\SysgetrowsUI.cs" />
+    <Compile Include="Sys\SysgettreecolsUI.cs" />
+    <Compile Include="Sys\SsappmenuAllOlist1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\Rpt00datavol.xml" />
+    <EmbeddedResource Include="XML\Ss00app.xml" />
+    <EmbeddedResource Include="XML\Ss00appissue.xml" />
+    <EmbeddedResource Include="XML\Ss00appmenu.xml" />
+    <EmbeddedResource Include="XML\Ss00appmenuconfig.xml" />
+    <EmbeddedResource Include="XML\Ss00appreg.xml" />
+    <EmbeddedResource Include="XML\Ss00appregconfig.xml" />
+    <EmbeddedResource Include="XML\Ss00appversi.xml" />
+    <EmbeddedResource Include="XML\Ss00appversiconfig.xml" />
+    <EmbeddedResource Include="XML\Ss01appmenu.xml" />
+    <EmbeddedResource Include="XML\Ss01appmenuconfig.xml" />
+    <EmbeddedResource Include="XML\Ss10user.xml" />
+    <EmbeddedResource Include="XML\Ss10userapp.xml" />
+    <EmbeddedResource Include="XML\Ss10usertypes.xml" />
+    <EmbeddedResource Include="XML\Ss11userol.xml" />
+    <EmbeddedResource Include="XML\Ss20group.xml" />
+    <EmbeddedResource Include="XML\Ss20groupconfig.xml" />
+    <EmbeddedResource Include="XML\Ss20groupmenu.xml" />
+    <EmbeddedResource Include="XML\Ss90dictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Ext.Net">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\Ext.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\Ext.Net.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\Dmdok.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\Ss00appconfig.xml" />
+    <EmbeddedResource Include="XML\Ss00appconfigpar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\Ss01appmenukkp.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XML\Ss00appkkp.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreNET.Common.Data\CoreNET.Common.Data.csproj">
+      <Project>{fa4f5b18-0024-4c1d-bfc9-305575dfcdb2}</Project>
+      <Name>CoreNET.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreNET.Common.Ext\CoreNET.Common.Ext.csproj">
+      <Project>{03a94c4e-0b23-4353-a340-7006f9ebee01}</Project>
+      <Name>CoreNET.Common.Ext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreNET.Common.Lib\CoreNET.Common.Lib.csproj">
+      <Project>{13de9ac0-b86e-4b68-aa27-39f102c2bb9d}</Project>
+      <Name>CoreNET.Common.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreNET.Common.UI\CoreNET.Common.UI.csproj">
+      <Project>{9f8a2f4f-29fc-4777-95fd-e4323cd54c06}</Project>
+      <Name>CoreNET.Common.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQL\ViewMenuLogCount.sql" />
+    <EmbeddedResource Include="XML\Dmstatus.xml" />
+    <EmbeddedResource Include="XML\Ss10usermenu.xml" />
+    <EmbeddedResource Include="XML\Ss20groupuser.xml" />
+    <EmbeddedResource Include="XML\Dmpemda.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Base.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<PropertyGroup>
+    <PreBuildEvent>subwcrev "$(ProjectDir)." "$(ProjectDir)AssemblyInfoTemplate.cs" "$(ProjectDir)Properties\AssemblyInfo.cs" -f</PreBuildEvent>
+  </PropertyGroup>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

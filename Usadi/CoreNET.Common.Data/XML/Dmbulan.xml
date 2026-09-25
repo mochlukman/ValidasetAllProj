@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmbulan" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmbulan" type="CoreNET.Common.BO.DmbulanControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmbulan">
+        <result property="Kdbulan" column="KDBULAN"/>
+        <result property="Nmbulan" column="NMBULAN"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Bulan" column="BULAN"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmbulan" parameterMap="insert-param">
+        <generate table="Dmbulan"/>
+      </insert>
+      <update id="UpdateByDmbulan" parameterMap="update-param">
+        <generate table="Dmbulan" by="BULAN"/>
+      </update>
+      <delete id="DeleteByDmbulan" parameterMap="delete-param">
+        <generate table="Dmbulan" by="BULAN"/>
+      </delete>
+      <select id="BaseQueryDmbulan" parameterClass="Dmbulan" resultMap="return-result">
+        select D.BULAN,rtrim(D.KDBULAN) as KDBULAN,rtrim(D.NMBULAN) as NMBULAN,rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMBULAN D
+      </select>
+      <select id="QueryByAllDmbulan" extends="BaseQueryDmbulan" parameterClass="Dmbulan" resultMap="return-result">
+        where 1=1
+        order by D.BULAN
+      </select>
+      <select id="LoadByPKDmbulan" extends="BaseQueryDmbulan" parameterClass="Dmbulan" resultMap="return-result">
+        where D.BULAN = #Bulan#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmbulan">
+        <parameter property="Kdbulan" column="KDBULAN"/>
+        <parameter property="Nmbulan" column="NMBULAN"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Bulan" column="BULAN"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmbulan">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmbulan">
+        <parameter property="Bulan" column="BULAN"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

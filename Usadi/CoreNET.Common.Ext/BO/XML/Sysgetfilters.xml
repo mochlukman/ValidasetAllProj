@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Sysgetfilters" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Sysgetfilters" type="CoreNET.Common.BO.SysgetfiltersControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Sysgetfilters">
+        <result property="Rowtype" column="ROWTYPE"/>
+        <result property="Rowwidth" column="ROWWIDTH"/>
+        <result property="Rowenable" column="ROWENABLE"/>
+        <result property="Roweditable" column="ROWEDITABLE"/>
+        <result property="Rowavaillist" column="ROWAVAILLIST"/>
+        <result property="Nourut" column="NOURUT"/>
+        <result property="Typename" column="TYPENAME"/>
+        <result property="Rowname" column="ROWNAME"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSysgetfilters" parameterMap="insert-param">
+        <generate table="Sysgetfilters"/>
+      </insert>
+      <update id="UpdateBySysgetfilters" parameterClass="Sysgetfilters">
+        update SYSGETFILTERS set ROWNAME=#Rowname#,ROWTYPE=#Rowtype#,ROWWIDTH=#Rowwidth#,ROWENABLE=#Rowenable#,ROWEDITABLE=#Roweditable#,
+        ROWAVAILLIST=#Rowavaillist#,NOURUT=#Nourut#
+        where TYPENAME=#Typename# and ROWNAME=#Rownameprev#
+      </update>
+      <delete id="DeleteBySysgetfilters" parameterMap="delete-param">
+        <generate table="Sysgetfilters" by="TYPENAME,ROWNAME"/>
+      </delete>
+      <select id="BaseQuerySysgetfilters" parameterClass="Sysgetfilters" resultMap="return-result">
+        select rtrim(S.TYPENAME) as TYPENAME,rtrim(S.ROWNAME) as ROWNAME,rtrim(S.ROWTYPE) as ROWTYPE,S.ROWWIDTH,S.ROWENABLE,S.ROWEDITABLE,rtrim(S.ROWAVAILLIST) as ROWAVAILLIST,S.NOURUT
+        from SYSGETFILTERS S
+      </select>
+      <select id="QueryByAllSysgetfilters" extends="BaseQuerySysgetfilters" parameterClass="Sysgetfilters" resultMap="return-result">
+        where 1=1
+        and S.TYPENAME=#Typename#
+        order by S.NOURUT
+      </select>
+      <select id="QueryByLookupSysgetfilters" extends="BaseQuerySysgetfilters" parameterClass="Sysgetfilters" resultMap="return-result">
+        where 1=1
+        order by S.TYPENAME,S.ROWNAME
+      </select>
+      <select id="LoadByPKSysgetfilters" extends="BaseQuerySysgetfilters" parameterClass="Sysgetfilters" resultMap="return-result">
+        where S.TYPENAME = #Typename# and S.ROWNAME = #Rowname#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Sysgetfilters">
+        <parameter property="Rowtype" column="ROWTYPE"/>
+        <parameter property="Rowwidth" column="ROWWIDTH"/>
+        <parameter property="Rowenable" column="ROWENABLE"/>
+        <parameter property="Roweditable" column="ROWEDITABLE"/>
+        <parameter property="Rowavaillist" column="ROWAVAILLIST"/>
+        <parameter property="Nourut" column="NOURUT"/>
+        <parameter property="Typename" column="TYPENAME"/>
+        <parameter property="Rowname" column="ROWNAME"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Sysgetfilters">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Sysgetfilters">
+        <parameter property="Typename" column="TYPENAME"/>
+        <parameter property="Rowname" column="ROWNAME"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

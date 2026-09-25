@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss90dictionary" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Ss90dictionary" type="CoreNET.Common.BO.Ss90dictionaryControl" />
+  </alias>
+  <resultMaps>
+    <resultMap id="return-result" class="Ss90dictionary">
+      <result property="Word1" column="WORD1"/>
+      <result property="Word2" column="WORD2"/>
+      <result property="Word3" column="WORD3"/>
+      <result property="Last_by" column="LAST_BY"/>
+      <result property="Last_date" column="LAST_DATE"/>
+      <result property="Keyword" column="KEYWORD"/>
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="InsertSs90dictionary" parameterMap="insert-param">
+      <generate table="Ss90dictionary"/>
+    </insert>
+    <update id="UpdateBySs90dictionary" parameterClass="Ss90dictionary">
+      update SS90DICTIONARY set KEYWORD=#Keyword#,WORD1=#Word1#,WORD2=#Word2#,WORD3=#Word3#,LAST_BY=#Last_by#,LAST_DATE=#Last_date#
+      where KEYWORD=#Keywordprev#
+    </update>
+    <delete id="DeleteBySs90dictionary" parameterMap="delete-param">
+      <generate table="Ss90dictionary" by="KEYWORD"/>
+    </delete>
+    <select id="BaseQuerySs90dictionary" parameterClass="Ss90dictionary" resultMap="return-result">
+      select rtrim(S.KEYWORD) as KEYWORD,rtrim(S.WORD1) as WORD1,rtrim(S.WORD2) as WORD2,rtrim(S.WORD3) as WORD3,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+      from SS90DICTIONARY S
+    </select>
+    <select id="QueryByAllSs90dictionary" extends="BaseQuerySs90dictionary" parameterClass="Ss90dictionary" resultMap="return-result">
+      where 1=1
+      order by S.KEYWORD
+    </select>
+    <select id="LoadByPKSs90dictionary" extends="BaseQuerySs90dictionary" parameterClass="Ss90dictionary" resultMap="return-result">
+      where S.KEYWORD = #Keyword#
+    </select>
+  </statements>
+  <parameterMaps>
+    <parameterMap id="insert-param" class="Ss90dictionary">
+      <parameter property="Word1" column="WORD1"/>
+      <parameter property="Word2" column="WORD2"/>
+      <parameter property="Word3" column="WORD3"/>
+      <parameter property="Last_by" column="LAST_BY"/>
+      <parameter property="Last_date" column="LAST_DATE"/>
+      <parameter property="Keyword" column="KEYWORD"/>
+    </parameterMap>
+    <parameterMap id="update-param" extends="insert-param" class="Ss90dictionary">
+    </parameterMap>
+    <parameterMap id="delete-param" class="Ss90dictionary">
+      <parameter property="Keyword" column="KEYWORD"/>
+    </parameterMap>
+  </parameterMaps>
+</sqlMap>
+

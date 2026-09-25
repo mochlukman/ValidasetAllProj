@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rpt00datavol" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Rpt00datavol" type="CoreNET.Common.BO.Rpt00datavolControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Rpt00datavol">
+        <result property="Row_count" column="ROW_COUNT"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Nmobj" column="NMOBJ"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertRpt00datavol" parameterMap="insert-param">
+        <generate table="Rpt00datavol"/>
+      </insert>
+      <update id="UpdateByRpt00datavol" parameterMap="update-param">
+        <generate table="Rpt00datavol" by="NMOBJ"/>
+      </update>
+      <update id="UpdateByValidRevRpt00datavol" parameterClass="Rpt00datavol">
+        update RPT00DATAVOL set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevRpt00datavol" parameterClass="Rpt00datavol">
+        update RPT00DATAVOL set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteByRpt00datavol" parameterMap="delete-param">
+        <generate table="Rpt00datavol" by="NMOBJ"/>
+      </delete>
+      <select id="BaseQueryRpt00datavol" parameterClass="Rpt00datavol" resultMap="return-result">
+        select rtrim(R.NMOBJ) as NMOBJ,R.ROW_COUNT,R.KDLEVEL,rtrim(R.TYPE) as TYPE
+        from RPT00DATAVOL R
+      </select>
+      <select id="QueryByAllRpt00datavol" extends="BaseQueryRpt00datavol" parameterClass="Rpt00datavol" resultMap="return-result">
+        where 1=1
+        and (R.NMOBJ like #Nmobj#+'%' or isnull(#Nmobj#,'')='')
+        order by R.NMOBJ
+      </select>
+      <select id="QueryByLookupRpt00datavol" extends="BaseQueryRpt00datavol" parameterClass="Rpt00datavol" resultMap="return-result">
+        where 1=1
+        order by R.NMOBJ
+      </select>
+      <select id="LoadByPKRpt00datavol" extends="BaseQueryRpt00datavol" parameterClass="Rpt00datavol" resultMap="return-result">
+        where R.NMOBJ = #Nmobj#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Rpt00datavol">
+        <parameter property="Row_count" column="ROW_COUNT"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+        <parameter property="Type" column="TYPE"/>
+        <parameter property="Nmobj" column="NMOBJ"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Rpt00datavol">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Rpt00datavol">
+        <parameter property="Nmobj" column="NMOBJ"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

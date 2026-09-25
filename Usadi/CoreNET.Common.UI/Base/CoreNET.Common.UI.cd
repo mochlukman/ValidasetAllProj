@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CoreNET.Common.Base.BaseDataControlUI">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAgAACAIAgAAAAIAAAAAEECEAACJIAIBIAAAA=</HashCode>
+      <FileName>Base\BaseDataControlUI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CoreNET.Common.Base.BaseDataControlUIEntry">
+    <Position X="4.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACgCAAAAAAAAAAAAAAAIAAAgAAACAAAAAAAAAQBAAA=</HashCode>
+      <FileName>Base\BaseDataControlUI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="CoreNET.Common.Base.IDataControlUI">
+    <Position X="0.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAACAAAgAAAEAAAAAAAAAEAAAIAAABIAAAA=</HashCode>
+      <FileName>Interface\IDataControlUI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CoreNET.Common.Base.IDataControlUIEntry">
+    <Position X="3" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACgCAAAAAAAAAAAAAAAIAAAgAAACAAAAAAAAAQBAAA=</HashCode>
+      <FileName>Interface\IDataControlUI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CoreNET.Common.Base.IDataControlLookup">
+    <Position X="5.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\IDataControlUI.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

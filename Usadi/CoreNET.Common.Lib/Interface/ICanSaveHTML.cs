@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace CoreNET.Common.Base
+{
+  //public interface ICanSaveHTML
+  //{
+  //  string LoadHTML();
+  //  void SaveHTML(string html);
+  //}
+}

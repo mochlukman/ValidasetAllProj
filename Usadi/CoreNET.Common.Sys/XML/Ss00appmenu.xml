@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appmenu" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss00appmenu" type="CoreNET.Common.BO.Ss00appmenuControl, CoreNET.Common.Sys" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss00appmenu">
+        <result property="Nmmenu" column="NMMENU"/>
+        <result property="Idmenu" column="IDMENU"/>
+        <result property="Kdapp" column="KDAPP"/>
+        <result property="Nmapp" column="NMAPP"/>
+        <result property="Urapp" column="URAPP"/>
+        <result property="Kddok" column="KDDOK"/>
+        <result property="Idxdok" column="IDXDOK"/>
+        <result property="Url" column="URL"/>
+        <result property="UrlFull" column="URLFULL"/>
+        <result property="Olist1" column="OLIST1"/>
+        <result property="Olistdetil1" column="OLISTDETIL1"/>
+        <result property="Olistdetil2" column="OLISTDETIL2"/>
+        <result property="Olistdetil3" column="OLISTDETIL3"/>
+        <result property="Olistdetil4" column="OLISTDETIL4"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Kdmenu" column="KDMENU"/>
+      </resultMap>
+      <resultMap id="return-result-union" class="Ss00appmenu">
+        <result property="Olist1" column="OLIST1"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs00appmenu" parameterMap="insert-param">
+        <generate table="Ss00appmenu"/>
+      </insert>
+      <update id="UpdateBySs00appmenu" parameterMap="update-param">
+        <generate table="Ss00appmenu" by="IDAPP,KDMENU"/>
+      </update>
+      <update id="UpdateByValidRevSs00appmenu" parameterClass="Ss00appmenu">
+        update SS00APPMENU set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs00appmenu" parameterClass="Ss00appmenu">
+        update SS00APPMENU set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs00appmenu" parameterMap="delete-param">
+        <generate table="Ss00appmenu" by="IDAPP,KDMENU"/>
+      </delete>
+      <select id="BaseQuerySs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        select rtrim(S.IDAPP) as IDAPP,rtrim(A.KDAPP) as KDAPP,rtrim(A.NMAPP) as NMAPP,rtrim(A.URAPP) as URAPP,
+        rtrim(S.KDMENU) as KDMENU,
+        case when S.STATUS=-1 then rtrim(S.NMMENU)+' (test)' else rtrim(S.NMMENU) end as NMMENU,
+        rtrim(S.IDMENU) as IDMENU,rtrim(S.KDDOK) as KDDOK,rtrim(S.IDXDOK) as IDXDOK,
+        rtrim(S.URL) as URL,
+        rtrim(S.URL)+'app='+S.IDAPP+'&amp;id='+IDMENU as URLFULL,
+        rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+        rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPMENU S
+        inner join SS00APP A on S.IDAPP=A.IDAPP
+      </select>
+      <select id="QueryByAllSs00appmenu" extends="BaseQuerySs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        where 1=1
+        and S.IDAPP=#Idapp#
+        order by S.IDAPP,S.KDMENU
+      </select>
+      <select id="QueryByLookupSs00appmenu" extends="BaseQuerySs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.KDMENU
+      </select>
+      <select id="QueryByUnionSs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        select * from
+        (
+          select rtrim(S.IDAPP) as IDAPP,rtrim(A.KDAPP) as KDAPP,rtrim(A.NMAPP) as NMAPP,rtrim(A.URAPP) as URAPP,
+          rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,
+          rtrim(S.IDMENU) as IDMENU,rtrim(S.KDDOK) as KDDOK,rtrim(S.IDXDOK) as IDXDOK,
+          rtrim(S.URL) as URL,
+          rtrim(S.URL)+'app='+S.IDAPP+'&amp;id='+IDMENU as URLFULL,
+          rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+          rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+          S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+          from SS00APPMENU S
+          inner join SS00APP A on S.IDAPP=A.IDAPP
+          union
+          select rtrim(S.IDAPP) as IDAPP,rtrim(A.KDAPP) as KDAPP,rtrim(A.NMAPP) as NMAPP,rtrim(A.URAPP) as URAPP,
+          rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,
+          rtrim(S.IDMENU) as IDMENU,rtrim(S.KDDOK) as KDDOK,rtrim(S.IDXDOK) as IDXDOK,
+          rtrim(S.URL) as URL,
+          rtrim(S.URL)+'app='+S.IDAPP+'&amp;id='+IDMENU as URLFULL,
+          rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+          rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+          S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+          from SS01APPMENU S
+          inner join SS00APP A on S.IDAPP=A.IDAPP
+        )A
+      </select>
+      <select id="QueryByUnionOlist1Ss00appmenu" parameterClass="Ss00appmenu" resultMap="return-result-union">
+        select distinct rtrim(S.OLIST1) as OLIST1
+        from SS00APPMENU S where <![CDATA[isnull(S.OLIST1,'') <> '']]>
+        union
+        select distinct rtrim(S.OLIST1) as OLIST1
+        from SS01APPMENU S where <![CDATA[isnull(S.OLIST1,'') <> '']]>
+      </select>
+      <select id="LoadByPKSs00appmenu" extends="QueryByUnionSs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        where A.IDAPP = #Idapp# and A.KDMENU = #Kdmenu#
+      </select>
+      <select id="LoadByIDSs00appmenu" extends="QueryByUnionSs00appmenu" parameterClass="Ss00appmenu" resultMap="return-result">
+        where IDMENU = #Idmenu#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss00appmenu">
+        <parameter property="Nmmenu" column="NMMENU"/>
+        <parameter property="Idmenu" column="IDMENU"/>
+        <parameter property="Kddok" column="KDDOK"/>
+        <parameter property="Idxdok" column="IDXDOK"/>
+        <parameter property="Url" column="URL"/>
+        <parameter property="Olist1" column="OLIST1"/>
+        <parameter property="Olistdetil1" column="OLISTDETIL1"/>
+        <parameter property="Olistdetil2" column="OLISTDETIL2"/>
+        <parameter property="Olistdetil3" column="OLISTDETIL3"/>
+        <parameter property="Olistdetil4" column="OLISTDETIL4"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+        <parameter property="Type" column="TYPE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Kdmenu" column="KDMENU"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss00appmenu">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss00appmenu">
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Kdmenu" column="KDMENU"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

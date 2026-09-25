@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmlevel" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmlevel" type="CoreNET.Common.BO.DmlevelControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmlevel">
+        <result property="Nmlevel" column="NMLEVEL"/>
+        <result property="Isroot" column="ISROOT"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Tablename" column="TABLENAME"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmlevel" parameterMap="insert-param">
+        <generate table="Dmlevel"/>
+      </insert>
+      <update id="UpdateByDmlevel" parameterMap="update-param">
+        <generate table="Dmlevel" by="TABLENAME,KDLEVEL"/>
+      </update>
+      <delete id="DeleteByDmlevel" parameterMap="delete-param">
+        <generate table="Dmlevel" by="TABLENAME,KDLEVEL"/>
+      </delete>
+      <select id="BaseQueryDmlevel" parameterClass="Dmlevel" resultMap="return-result">
+        select rtrim(D.TABLENAME) as TABLENAME,KDLEVEL,rtrim(D.NMLEVEL) as NMLEVEL,D.ISROOT,D.STATUS,rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMLEVEL D
+      </select>
+      <select id="QueryByAllDmlevel" extends="BaseQueryDmlevel" parameterClass="Dmlevel" resultMap="return-result">
+        where 1=1
+        and (
+        (rtrim(D.TABLENAME) like #Tablename#+'%' and <![CDATA[isnull(#Tablename#,'')<>'' ]]> )
+        or (isnull(#Tablename#,'')=rtrim(D.TABLENAME))
+        )
+        order by D.TABLENAME,D.KDLEVEL
+      </select>
+      <select id="QueryByLookupDmlevel" extends="BaseQueryDmlevel" parameterClass="Dmlevel" resultMap="return-result">
+        where 1=1
+        order by D.TABLENAME,D.KDLEVEL
+      </select>
+      <select id="QueryByTpDmlevel" extends="BaseQueryDmlevel" parameterClass="Dmlevel" resultMap="return-result">
+        where 1=1
+        order by D.TABLENAME,D.KDLEVEL
+      </select>
+      <select id="LoadByPKDmlevel" extends="BaseQueryDmlevel" parameterClass="Dmlevel" resultMap="return-result">
+        where D.TABLENAME = #Tablename# and D.KDLEVEL = #Kdlevel#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmlevel">
+        <parameter property="Nmlevel" column="NMLEVEL"/>
+        <parameter property="Isroot" column="ISROOT"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Tablename" column="TABLENAME"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmlevel">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmlevel">
+        <parameter property="Tablename" column="TABLENAME"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

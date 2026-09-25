@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss30roleconfig" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss30roleconfig" type="CoreNET.Common.BO.Ss30roleconfigControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss30roleconfig">
+        <result property="Par" column="PAR"/>
+        <result property="Value" column="VALUE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idrole" column="IDROLE"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs30roleconfig" parameterMap="insert-param">
+        <generate table="Ss30roleconfig"/>
+      </insert>
+      <update id="UpdateBySs30roleconfig" parameterMap="update-param">
+        <generate table="Ss30roleconfig" by="IDROLE"/>
+      </update>
+      <update id="UpdateByValidRevSs30roleconfig" parameterClass="Ss30roleconfig">
+        update SS30ROLECONFIG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs30roleconfig" parameterClass="Ss30roleconfig">
+        update SS30ROLECONFIG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs30roleconfig" parameterMap="delete-param">
+        <generate table="Ss30roleconfig" by="IDROLE"/>
+      </delete>
+      <select id="BaseQuerySs30roleconfig" parameterClass="Ss30roleconfig" resultMap="return-result">
+        select rtrim(S.IDROLE) as IDROLE,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,rtrim(S.LAST_BY) as LAST_BY,S.LAST_DATE
+        from SS30ROLECONFIG S
+      </select>
+      <select id="QueryByAllSs30roleconfig" extends="BaseQuerySs30roleconfig" parameterClass="Ss30roleconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDROLE
+      </select>
+      <select id="QueryByLookupSs30roleconfig" extends="BaseQuerySs30roleconfig" parameterClass="Ss30roleconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDROLE
+      </select>
+      <select id="LoadByPKSs30roleconfig" extends="BaseQuerySs30roleconfig" parameterClass="Ss30roleconfig" resultMap="return-result">
+        where S.IDROLE = #Idrole#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss30roleconfig">
+        <parameter property="Par" column="PAR"/>
+        <parameter property="Value" column="VALUE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idrole" column="IDROLE"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss30roleconfig">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss30roleconfig">
+        <parameter property="Idrole" column="IDROLE"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

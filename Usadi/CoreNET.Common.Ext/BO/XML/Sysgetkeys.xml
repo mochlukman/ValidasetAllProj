@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Sysgetkeys" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Sysgetkeys" type="CoreNET.Common.BO.SysgetkeysControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Sysgetkeys">
+        <result property="Cols" column="COLS"/>
+        <result property="Csvcols" column="CSVCOLS"/>
+        <result property="Loadcsvcols" column="LOADCSVCOLS"/>
+        <result property="Loadconfig" column="LOADCONFIG"/>
+        <result property="Typename" column="TYPENAME"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSysgetkeys" parameterMap="insert-param">
+        <generate table="Sysgetkeys"/>
+      </insert>
+      <update id="UpdateBySysgetkeys" parameterMap="update-param">
+        <generate table="Sysgetkeys" by="TYPENAME"/>
+      </update>
+      <update id="UpdateByValidRevSysgetkeys" parameterClass="Sysgetkeys">
+        update SYSGETKEYS set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSysgetkeys" parameterClass="Sysgetkeys">
+        update SYSGETKEYS set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySysgetkeys" parameterMap="delete-param">
+        <generate table="Sysgetkeys" by="TYPENAME"/>
+      </delete>
+      <select id="BaseQuerySysgetkeys" parameterClass="Sysgetkeys" resultMap="return-result">
+        select rtrim(S.TYPENAME) as TYPENAME,rtrim(S.COLS) as COLS,rtrim(S.CSVCOLS) as CSVCOLS,rtrim(S.LOADCSVCOLS) as LOADCSVCOLS,rtrim(LOADCONFIG) as LOADCONFIG
+        from SYSGETKEYS S
+      </select>
+      <select id="QueryByAllSysgetkeys" extends="BaseQuerySysgetkeys" parameterClass="Sysgetkeys" resultMap="return-result">
+        where 1=1
+        and S.TYPENAME=#Typename# 
+        order by S.TYPENAME
+      </select>
+      <select id="QueryByLookupSysgetkeys" extends="BaseQuerySysgetkeys" parameterClass="Sysgetkeys" resultMap="return-result">
+        where 1=1
+        order by S.TYPENAME
+      </select>
+      <select id="LoadByPKSysgetkeys" extends="BaseQuerySysgetkeys" parameterClass="Sysgetkeys" resultMap="return-result">
+        where S.TYPENAME = #Typename#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Sysgetkeys">
+        <parameter property="Cols" column="COLS"/>
+        <parameter property="Csvcols" column="CSVCOLS"/>
+        <parameter property="Loadcsvcols" column="LOADCSVCOLS"/>
+        <parameter property="Loadconfig" column="LOADCONFIG"/>
+        <parameter property="Typename" column="TYPENAME"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Sysgetkeys">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Sysgetkeys">
+        <parameter property="Typename" column="TYPENAME"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

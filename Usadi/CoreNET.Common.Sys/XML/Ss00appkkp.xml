@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appkkp" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Ss00appkkp" type="CoreNET.Common.BO.Ss00appkkpControl" />
+  </alias>
+  <resultMaps>
+    <resultMap id="return-result" class="Ss00appkkp">
+      <result property="Lastnodok" column="LASTNODOK"/>
+      <result property="Nodok" column="NODOK"/>
+      <result property="Nfiles" column="NFILES"/>
+      <result property="Statusicon" column="STATUSICON"/>
+      <result property="Progress" column="PROGRESS"/>
+      <result property="Urdok" column="URDOK"/>
+      <result property="Kddok" column="KDDOK"/>
+      <result property="Status" column="STATUS"/>
+      <result property="Cre_by" column="CRE_BY"/>
+      <result property="Cre_date" column="CRE_DATE"/>
+      <result property="Mod_by" column="MOD_BY"/>
+      <result property="Mod_date" column="MOD_DATE"/>
+      <result property="Rev_by" column="REV_BY"/>
+      <result property="Rev_date" column="REV_DATE"/>
+      <result property="App_by" column="APP_BY"/>
+      <result property="App_date" column="APP_DATE"/>
+      <result property="Sign_by" column="SIGN_BY"/>
+      <result property="Sign_date" column="SIGN_DATE"/>
+      <result property="Last_by" column="LAST_BY"/>
+      <result property="Last_date" column="LAST_DATE"/>
+      <result property="Idapp" column="IDAPP"/>
+      <result property="Iddok" column="IDDOK"/>
+    </resultMap>
+    <resultMap id="return-result-last" class="Ss00appkkp">
+      <result property="Nodok" column="NODOK"/>
+      <result property="Iddok" column="IDDOK"/>
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="InsertSs00appkkp" parameterMap="insert-param">
+      <generate table="Ss00appkkp"/>
+    </insert>
+    <update id="UpdateBySs00appkkp" parameterMap="update-param">
+      <generate table="Ss00appkkp" by="IDAPP,IDDOK"/>
+    </update>
+    <update id="UpdateByValidRevSs00appkkp" parameterClass="Ss00appkkp">
+      update SS00APPKKP set REV_BY=#Rev_by# and REV_DATE=#Rev_date# and LAST_BY=#Last_by# and LAST_DATE=#Last_date#
+    </update>
+    <update id="UpdateByUnValidRevSs00appkkp" parameterClass="Ss00appkkp">
+      update SS00APPKKP set REV_BY='' and REV_DATE=null
+    </update>
+    <delete id="DeleteBySs00appkkp" parameterMap="delete-param">
+      <generate table="Ss00appkkp" by="IDAPP,IDDOK"/>
+    </delete>
+    <select id="BaseQuerySs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result">
+      select rtrim(P2.NODOK) as LASTNODOK,rtrim(P.IDAPP) as IDAPP,rtrim(P.IDDOK) as IDDOK,
+      rtrim(P.NODOK) as NODOK,P.NFILES,rtrim(P.STATUSICON) as STATUSICON,P.PROGRESS,
+      rtrim(P.URDOK) as URDOK,rtrim(P.KDDOK) as KDDOK,P.STATUS,
+      rtrim(P.CRE_BY) as CRE_BY,P.CRE_DATE,rtrim(P.MOD_BY) as MOD_BY,P.MOD_DATE,rtrim(P.REV_BY) as REV_BY,P.REV_DATE,
+      rtrim(P.APP_BY) as APP_BY,P.APP_DATE,rtrim(P.SIGN_BY) as SIGN_BY,P.SIGN_DATE,rtrim(P.LAST_BY) as LAST_BY,P.LAST_DATE
+      from SS00APPKKP P
+      inner join
+      (
+      select top 1 IDAPP,NODOK from SS00APPKKP
+      where 1=1
+      and IDAPP=#Idapp# and left(NODOK,len(#Nodok#))=#Nodok#
+      order by NODOK desc
+      )P2 on P.IDAPP=P2.IDAPP
+    </select>
+    <select id="QueryByAllSs00appkkp" extends="BaseQuerySs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result">
+      where 1=1
+      and P.IDAPP=#Idapp# and left(P.NODOK,len(#Nodok#))=#Nodok#
+      order by P.NODOK
+    </select>
+    <select id="QueryByLookupSs00appkkp" extends="BaseQuerySs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result">
+      where 1=1
+      order by P.IDAPP,P.IDDOK
+    </select>
+    <select id="QueryByFilterSs00appkkp" extends="BaseQuerySs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result">
+      where 1=1
+      and IDAPP=#Idapp# and left(P.NODOK,len(#Nodok#))=#Nodok#
+      order by P.IDAPP,P.IDDOK
+    </select>
+    <select id="QueryByLastSs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result-last">
+      select top 1 P.IDDOK,rtrim(P.NODOK) as NODOK
+      from SS00APPKKP P
+      where 1=1
+      and IDAPP=#Idapp# and left(P.NODOK,len(#Nodok#))=#Nodok#
+      order by P.NODOK desc
+    </select>
+    <select id="LoadByPKSs00appkkp" extends="BaseQuerySs00appkkp" parameterClass="Ss00appkkp" resultMap="return-result">
+      where P.IDAPP = #Idapp# and P.IDDOK = #Iddok#
+    </select>
+  </statements>
+  <parameterMaps>
+    <parameterMap id="insert-param" class="Ss00appkkp">
+      <parameter property="Nodok" column="NODOK"/>
+      <parameter property="Urdok" column="URDOK"/>
+      <parameter property="Kddok" column="KDDOK"/>
+      <parameter property="Status" column="STATUS"/>
+      <parameter property="Cre_by" column="CRE_BY"/>
+      <parameter property="Cre_date" column="CRE_DATE"/>
+      <parameter property="Last_by" column="LAST_BY"/>
+      <parameter property="Last_date" column="LAST_DATE"/>
+      <parameter property="Idapp" column="IDAPP"/>
+      <parameter property="Iddok" column="IDDOK"/>
+    </parameterMap>
+    <parameterMap id="update-param" class="Ss00appkkp">
+      <parameter property="Nodok" column="NODOK"/>
+      <parameter property="Nfiles" column="NFILES"/>
+      <parameter property="Statusicon" column="STATUSICON"/>
+      <parameter property="Progress" column="PROGRESS"/>
+      <parameter property="Urdok" column="URDOK"/>
+      <parameter property="Kddok" column="KDDOK"/>
+      <parameter property="Status" column="STATUS"/>
+      <parameter property="Mod_by" column="MOD_BY"/>
+      <parameter property="Mod_date" column="MOD_DATE"/>
+      <parameter property="Last_by" column="LAST_BY"/>
+      <parameter property="Last_date" column="LAST_DATE"/>
+      <parameter property="Idapp" column="IDAPP"/>
+      <parameter property="Iddok" column="IDDOK"/>
+    </parameterMap>
+    <parameterMap id="delete-param" class="Ss00appkkp">
+      <parameter property="Idapp" column="IDAPP"/>
+      <parameter property="Iddok" column="IDDOK"/>
+    </parameterMap>
+  </parameterMaps>
+</sqlMap>
+

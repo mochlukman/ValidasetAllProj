@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appconfig" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss00appconfig" type="CoreNET.Common.BO.Ss00appconfigControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss00appconfig">
+        <result property="Value" column="VALUE"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Par" column="PAR"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs00appconfig" parameterMap="insert-param">
+        <generate table="Ss00appconfig"/>
+      </insert>
+      <update id="UpdateBySs00appconfig" parameterMap="update-param">
+        <generate table="Ss00appconfig" by="IDAPP,PAR"/>
+      </update>
+      <update id="UpdateByValidRevSs00appconfig" parameterClass="Ss00appconfig">
+        update SS00APPCONFIG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs00appconfig" parameterClass="Ss00appconfig">
+        update SS00APPCONFIG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs00appconfig" parameterMap="delete-param">
+        <generate table="Ss00appconfig" by="IDAPP,PAR"/>
+      </delete>
+      <select id="BaseQuerySs00appconfig" parameterClass="Ss00appconfig" resultMap="return-result">
+        select rtrim(S.IDAPP) as IDAPP,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPCONFIG S
+      </select>
+      <select id="QueryByAllSs00appconfig" extends="BaseQuerySs00appconfig" parameterClass="Ss00appconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.PAR
+      </select>
+      <select id="QueryByLookupSs00appconfig" extends="BaseQuerySs00appconfig" parameterClass="Ss00appconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.PAR
+      </select>
+      <select id="LoadByPKSs00appconfig" extends="BaseQuerySs00appconfig" parameterClass="Ss00appconfig" resultMap="return-result">
+        where S.IDAPP = #Idapp# and S.PAR = #Par#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss00appconfig">
+        <parameter property="Value" column="VALUE"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss00appconfig">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss00appconfig">
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

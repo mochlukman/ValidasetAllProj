@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Sysgetcols" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Sysgetcols" type="CoreNET.Common.BO.SysgetcolsControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Sysgetcols">
+        <result property="Coltype" column="COLTYPE"/>
+        <result property="Colwidth" column="COLWIDTH"/>
+        <result property="Colalign" column="COLALIGN"/>
+        <result property="Coleditable" column="COLEDITABLE"/>
+        <result property="Colavaillist" column="COLAVAILLIST"/>
+        <result property="Nourut" column="NOURUT"/>
+        <result property="Typename" column="TYPENAME"/>
+        <result property="Mode" column="MODE"/>
+        <result property="Colname" column="COLNAME"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSysgetcols" parameterMap="insert-param">
+        <generate table="Sysgetcols"/>
+      </insert>
+      <update id="UpdateBySysgetcols" parameterClass="Sysgetcols">
+        update SYSGETCOLS set COLNAME=#Colname#,COLTYPE=#Coltype#,COLWIDTH=#Colwidth#,COLALIGN=#Colalign#,
+        COLEDITABLE=#Coleditable#,COLAVAILLIST=#Colavaillist#,NOURUT=#Nourut#
+        where TYPENAME=#Typename# and MODE=#Mode# and COLNAME=#Colnameprev#
+      </update>
+      <delete id="DeleteBySysgetcols" parameterMap="delete-param">
+        <generate table="Sysgetcols" by="TYPENAME,MODE,COLNAME"/>
+      </delete>
+      <select id="BaseQuerySysgetcols" parameterClass="Sysgetcols" resultMap="return-result">
+        select rtrim(S.TYPENAME) as TYPENAME,S.MODE,rtrim(S.COLNAME) as COLNAME,rtrim(S.COLTYPE) as COLTYPE,
+        S.COLWIDTH,rtrim(S.COLALIGN) as COLALIGN,S.COLEDITABLE,rtrim(S.COLAVAILLIST) as COLAVAILLIST,S.NOURUT
+        from SYSGETCOLS S
+      </select>
+      <select id="QueryByAllSysgetcols" extends="BaseQuerySysgetcols" parameterClass="Sysgetcols" resultMap="return-result">
+        where 1=1
+        and S.TYPENAME=#Typename# and S.Mode=#Mode#
+        order by S.NOURUT
+      </select>
+      <select id="QueryByLookupSysgetcols" extends="BaseQuerySysgetcols" parameterClass="Sysgetcols" resultMap="return-result">
+        where 1=1
+        order by S.TYPENAME,S.MODE,S.COLNAME
+      </select>
+      <select id="LoadByPKSysgetcols" extends="BaseQuerySysgetcols" parameterClass="Sysgetcols" resultMap="return-result">
+        where S.TYPENAME = #Typename# and S.MODE = #Mode# and S.COLNAME = #Colname#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Sysgetcols">
+        <parameter property="Coltype" column="COLTYPE"/>
+        <parameter property="Colwidth" column="COLWIDTH"/>
+        <parameter property="Colalign" column="COLALIGN"/>
+        <parameter property="Coleditable" column="COLEDITABLE"/>
+        <parameter property="Colavaillist" column="COLAVAILLIST"/>
+        <parameter property="Nourut" column="NOURUT"/>
+        <parameter property="Typename" column="TYPENAME"/>
+        <parameter property="Mode" column="MODE"/>
+        <parameter property="Colname" column="COLNAME"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Sysgetcols">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Sysgetcols">
+        <parameter property="Typename" column="TYPENAME"/>
+        <parameter property="Mode" column="MODE"/>
+        <parameter property="Colname" column="COLNAME"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

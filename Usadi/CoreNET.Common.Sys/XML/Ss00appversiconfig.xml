@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appversiconfig" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss00appversiconfig" type="CoreNET.Common.BO.Ss00appversiconfigControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss00appversiconfig">
+        <result property="Value" column="VALUE"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idversiapp" column="IDVERSIAPP"/>
+        <result property="Par" column="PAR"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs00appversiconfig" parameterMap="insert-param">
+        <generate table="Ss00appversiconfig"/>
+      </insert>
+      <update id="UpdateBySs00appversiconfig" parameterMap="update-param">
+        <generate table="Ss00appversiconfig" by="IDVERSIAPP,PAR"/>
+      </update>
+      <update id="UpdateByValidRevSs00appversiconfig" parameterClass="Ss00appversiconfig">
+        update SS00APPVERSICONFIG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs00appversiconfig" parameterClass="Ss00appversiconfig">
+        update SS00APPVERSICONFIG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs00appversiconfig" parameterMap="delete-param">
+        <generate table="Ss00appversiconfig" by="IDVERSIAPP,PAR"/>
+      </delete>
+      <select id="BaseQuerySs00appversiconfig" parameterClass="Ss00appversiconfig" resultMap="return-result">
+        select rtrim(S.IDVERSIAPP) as IDVERSIAPP,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPVERSICONFIG S
+      </select>
+      <select id="QueryByAllSs00appversiconfig" extends="BaseQuerySs00appversiconfig" parameterClass="Ss00appversiconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDVERSIAPP,S.PAR
+      </select>
+      <select id="QueryByLookupSs00appversiconfig" extends="BaseQuerySs00appversiconfig" parameterClass="Ss00appversiconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDVERSIAPP,S.PAR
+      </select>
+      <select id="LoadByPKSs00appversiconfig" extends="BaseQuerySs00appversiconfig" parameterClass="Ss00appversiconfig" resultMap="return-result">
+        where S.IDVERSIAPP = #Idversiapp# and S.PAR = #Par#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss00appversiconfig">
+        <parameter property="Value" column="VALUE"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idversiapp" column="IDVERSIAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss00appversiconfig">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss00appversiconfig">
+        <parameter property="Idversiapp" column="IDVERSIAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

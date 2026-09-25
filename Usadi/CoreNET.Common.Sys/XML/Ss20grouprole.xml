@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss20grouprole" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss20grouprole" type="CoreNET.Common.BO.Ss20grouproleControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss20grouprole">
+        <result property="Kdrole" column="KDROLE"/>
+        <result property="Nmrole" column="NMROLE"/>
+        <result property="Nama" column="NAMA"/>
+        <result property="Nip" column="NIP"/>
+        <result property="Email" column="EMAIL"/>
+        <result property="Nipatasan" column="NIPATASAN"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idst" column="IDST"/>
+        <result property="Idrole" column="IDROLE"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs20grouprole" parameterMap="insert-param">
+        <generate table="Ss20grouprole"/>
+      </insert>
+      <update id="UpdateBySs20grouprole" parameterMap="update-param">
+        <generate table="Ss20grouprole" by="IDST,IDROLE"/>
+      </update>
+      <update id="UpdateByValidRevSs20grouprole" parameterClass="Ss20grouprole">
+        update SS20GROUPROLE set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs20grouprole" parameterClass="Ss20grouprole">
+        update SS20GROUPROLE set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs20grouprole" parameterMap="delete-param">
+        <generate table="Ss20grouprole" by="IDST,IDROLE"/>
+      </delete>
+      <select id="BaseQuerySs20grouprole" parameterClass="Ss20grouprole" resultMap="return-result">
+        select rtrim(S.IDST) as IDST,rtrim(S.IDROLE) as IDROLE,rtrim(S.KDROLE) as KDROLE,rtrim(S.NMROLE) as NMROLE,rtrim(S.NAMA) as NAMA,rtrim(S.NIP) as NIP,rtrim(S.EMAIL) as EMAIL,rtrim(S.NIPATASAN) as NIPATASAN,S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(S.LAST_BY) as LAST_BY,S.LAST_DATE
+        from SS20GROUPROLE S
+      </select>
+      <select id="QueryByAllSs20grouprole" extends="BaseQuerySs20grouprole" parameterClass="Ss20grouprole" resultMap="return-result">
+        where 1=1
+        order by S.IDST,S.IDROLE
+      </select>
+      <select id="QueryByLookupSs20grouprole" extends="BaseQuerySs20grouprole" parameterClass="Ss20grouprole" resultMap="return-result">
+        where 1=1
+        order by S.IDST,S.IDROLE
+      </select>
+      <select id="LoadByPKSs20grouprole" extends="BaseQuerySs20grouprole" parameterClass="Ss20grouprole" resultMap="return-result">
+        where S.IDST = #Idst# and S.IDROLE = #Idrole#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss20grouprole">
+        <parameter property="Kdrole" column="KDROLE"/>
+        <parameter property="Nmrole" column="NMROLE"/>
+        <parameter property="Nama" column="NAMA"/>
+        <parameter property="Nip" column="NIP"/>
+        <parameter property="Email" column="EMAIL"/>
+        <parameter property="Nipatasan" column="NIPATASAN"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+        <parameter property="Type" column="TYPE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idst" column="IDST"/>
+        <parameter property="Idrole" column="IDROLE"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss20grouprole">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss20grouprole">
+        <parameter property="Idst" column="IDST"/>
+        <parameter property="Idrole" column="IDROLE"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

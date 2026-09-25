@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CoreNET.Common.Base.BaseBO">
+    <Position X="3.5" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>8GxBNbKWuGBb/95JhB2FNIrfhDSvp1cFeXmWLyOqy/M=</HashCode>
+      <FileName>BO\BaseBO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CoreNET.Common.Base.IDataControl">
+    <Position X="0.5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAQIgEAAoAAAAgAAAAAAIAAAAAEBAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interface\IDataControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

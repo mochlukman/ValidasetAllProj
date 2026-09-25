@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Sysgettreecols" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <alias>
+    <typeAlias alias="Sysgettreecols" type="CoreNET.Common.BO.SysgettreecolsControl" />
+  </alias>
+  <resultMaps>
+    <resultMap id="return-result" class="Sysgettreecols">
+      <result property="Coltype" column="COLTYPE"/>
+      <result property="Colwidth" column="COLWIDTH"/>
+      <result property="Colalign" column="COLALIGN"/>
+      <result property="Nourut" column="NOURUT"/>
+      <result property="Typename" column="TYPENAME"/>
+      <result property="Mode" column="MODE"/>
+      <result property="Colname" column="COLNAME"/>
+    </resultMap>
+    <resultMap id="return-result-distinct" class="Sysgettreecols">
+      <result property="Coltype" column="COLTYPE"/>
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="InsertSysgettreecols" parameterMap="insert-param">
+      <generate table="Sysgettreecols"/>
+    </insert>
+    <update id="UpdateBySysgettreecols" parameterClass="Sysgettreecols">
+      update SYSGETTREECOLS set COLNAME=#Colname#,COLTYPE=#Coltype#,COLWIDTH=#Colwidth#,COLALIGN=#Colalign#,NOURUT=#Nourut#
+      where TYPENAME=#Typename# and MODE=#Mode# and COLNAME=#Colnameprev#
+    </update>
+    <delete id="DeleteBySysgettreecols" parameterMap="delete-param">
+      <generate table="Sysgettreecols" by="TYPENAME,MODE,COLNAME"/>
+    </delete>
+    <select id="BaseQuerySysgettreecols" parameterClass="Sysgettreecols" resultMap="return-result">
+      select rtrim(S.TYPENAME) as TYPENAME,S.MODE,rtrim(S.COLNAME) as COLNAME,rtrim(S.COLTYPE) as COLTYPE,S.COLWIDTH,
+      rtrim(S.COLALIGN) as COLALIGN,S.NOURUT
+      from SYSGETTREECOLS S
+    </select>
+    <select id="QueryByAllSysgettreecols" extends="BaseQuerySysgettreecols" parameterClass="Sysgettreecols" resultMap="return-result">
+      where 1=1
+      and S.TYPENAME=#Typename# and S.Mode=#Mode#
+      order by S.NOURUT
+    </select>
+    <select id="QueryByLookupSysgettreecols" extends="BaseQuerySysgettreecols" parameterClass="Sysgettreecols" resultMap="return-result">
+      where 1=1
+      order by S.TYPENAME,S.COLNAME
+    </select>
+    <select id="QueryByDistinctSysgettreecols" parameterClass="Sysgettreecols" resultMap="return-result-distinct">
+      select distinct rtrim(S.TYPENAME) as TYPENAME
+      from SYSGETTREECOLS S
+    </select>
+    <select id="LoadByPKSysgettreecols" extends="BaseQuerySysgettreecols" parameterClass="Sysgettreecols" resultMap="return-result">
+      where S.TYPENAME = #Typename# and S.COLNAME = #Colname#
+    </select>
+  </statements>
+  <parameterMaps>
+    <parameterMap id="insert-param" class="Sysgettreecols">
+      <parameter property="Coltype" column="COLTYPE"/>
+      <parameter property="Colwidth" column="COLWIDTH"/>
+      <parameter property="Colalign" column="COLALIGN"/>
+      <parameter property="Nourut" column="NOURUT"/>
+      <parameter property="Typename" column="TYPENAME"/>
+      <parameter property="Mode" column="MODE"/>
+      <parameter property="Colname" column="COLNAME"/>
+    </parameterMap>
+    <parameterMap id="update-param" extends="insert-param" class="Sysgettreecols">
+    </parameterMap>
+    <parameterMap id="delete-param" class="Sysgettreecols">
+      <parameter property="Typename" column="TYPENAME"/>
+      <parameter property="Mode" column="MODE"/>
+      <parameter property="Colname" column="COLNAME"/>
+    </parameterMap>
+  </parameterMaps>
+</sqlMap>
+

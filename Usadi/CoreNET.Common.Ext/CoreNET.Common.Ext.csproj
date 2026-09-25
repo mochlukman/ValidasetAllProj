@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03A94C4E-0B23-4353-A340-7006F9EBEE01}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoreNET.Common</RootNamespace>
+    <AssemblyName>CoreNET.Common.Ext</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\Ext.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Project\WebCMS\Bin\Ext.Net.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlToOpenXml">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Bin\HtmlToOpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.Common">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Bin\IBatisNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataAccess">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Bin\IBatisNet.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataMapper">
+      <HintPath>..\..\..\..\..\..\Project\ModulAset47\SIASDA\Bin\IBatisNet.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseUrl.cs" />
+    <Compile Include="Base\BaseDataControlExt.cs" />
+    <Compile Include="BO\BOSysUtils.cs" />
+    <Compile Include="BO\ConstantDictUI.cs" />
+    <Compile Include="BO\EventUI.cs" />
+    <Compile Include="BO\NotesUI.cs" />
+    <Compile Include="BO\NotesUIList.cs" />
+    <Compile Include="BO\ParamValue.cs" />
+    <Compile Include="BO\Sysgetcols.cs" />
+    <Compile Include="BO\SysgetcolsLookup.cs" />
+    <Compile Include="BO\Sysgetfilters.cs" />
+    <Compile Include="BO\SysgetfiltersLookup.cs" />
+    <Compile Include="BO\Sysgetkeys.cs" />
+    <Compile Include="BO\SysgetkeysLookup.cs" />
+    <Compile Include="BO\Sysgetrows.cs" />
+    <Compile Include="BO\SysgetrowsLookup.cs" />
+    <Compile Include="BO\Sysgettreecols.cs" />
+    <Compile Include="BO\SysgettreecolsLookup.cs" />
+    <Compile Include="Ext\ConstantDictExt.cs" />
+    <Compile Include="Ext\CoreNETCompositeField.cs" />
+    <Compile Include="Ext\ExtFormDetail.cs" />
+    <Compile Include="Ext\ExtGridFilter.cs" />
+    <Compile Include="Ext\ExtGridPanel.cs" />
+    <Compile Include="Ext\ExtGridPanelFilter.cs" />
+    <Compile Include="Ext\ExtStore.cs" />
+    <Compile Include="Ext\ExtTreeNode.cs" />
+    <Compile Include="Ext\ExtTreePageUtils.cs" />
+    <Compile Include="Ext\ExtTreePanelUtil.cs" />
+    <Compile Include="Ext\ExtWindows.cs" />
+    <Compile Include="Ext\ExtFields.cs" />
+    <Compile Include="GlobalExt.cs" />
+    <Compile Include="Interface\IDataControlMenu.cs" />
+    <Compile Include="Interface\IDataControlTreeGrid.cs" />
+    <Compile Include="Interface\IExtDataControl.cs" />
+    <Compile Include="Interface\IExtFormEntry.cs" />
+    <Compile Include="Interface\IExtLoadCsv.cs" />
+    <Compile Include="Interface\IExtPage.cs" />
+    <Compile Include="Interface\IHasMenuCommand.cs" />
+    <Compile Include="MyDisplayField20.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityExt.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreNET.Common.Data\CoreNET.Common.Data.csproj">
+      <Project>{fa4f5b18-0024-4c1d-bfc9-305575dfcdb2}</Project>
+      <Name>CoreNET.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreNET.Common.Lib\CoreNET.Common.Lib.csproj">
+      <Project>{13de9ac0-b86e-4b68-aa27-39f102c2bb9d}</Project>
+      <Name>CoreNET.Common.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreNET.Common.UI\CoreNET.Common.UI.csproj">
+      <Project>{9f8a2f4f-29fc-4777-95fd-e4323cd54c06}</Project>
+      <Name>CoreNET.Common.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BO\XML\Sysgetcols.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BO\XML\Sysgetfilters.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BO\XML\Sysgetkeys.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BO\XML\Sysgetrows.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BO\XML\Sysgettreecols.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Base\GetEntries.cd" />
+    <None Include="Base\IDataControl.cd" />
+    <None Include="Base\IDataControlMenu.cd" />
+    <None Include="Base\IDataControlUser.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<PropertyGroup>
+    <PreBuildEvent>subwcrev "$(ProjectDir)." "$(ProjectDir)AssemblyInfoTemplate.cs" "$(ProjectDir)Properties\AssemblyInfo.cs" -f</PreBuildEvent>
+  </PropertyGroup>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

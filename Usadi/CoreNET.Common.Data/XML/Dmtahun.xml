@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmtahun" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmtahun" type="CoreNET.Common.BO.DmtahunControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmtahun">
+        <result property="Nmtahun" column="NMTAHUN"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Kdtahun" column="KDTAHUN"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmtahun" parameterMap="insert-param">
+        <generate table="Dmtahun"/>
+      </insert>
+      <update id="UpdateByDmtahun" parameterMap="update-param">
+        <generate table="Dmtahun" by="KDTAHUN"/>
+      </update>
+      <delete id="DeleteByDmtahun" parameterMap="delete-param">
+        <generate table="Dmtahun" by="KDTAHUN"/>
+      </delete>
+      <select id="BaseQueryDmtahun" parameterClass="Dmtahun" resultMap="return-result">
+        select rtrim(D.KDTAHUN) as KDTAHUN,D.NMTAHUN,D.STATUS,rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMTAHUN D
+      </select>
+      <select id="QueryByAllDmtahun" extends="BaseQueryDmtahun" parameterClass="Dmtahun" resultMap="return-result">
+        where 1=1
+        and D.KDTAHUN not in (0)
+        order by D.KDTAHUN
+      </select>
+      <select id="LoadByPKDmtahun" extends="BaseQueryDmtahun" parameterClass="Dmtahun" resultMap="return-result">
+        where D.KDTAHUN = #Kdtahun#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmtahun">
+        <parameter property="Nmtahun" column="NMTAHUN"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Kdtahun" column="KDTAHUN"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmtahun">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmtahun">
+        <parameter property="Kdtahun" column="KDTAHUN"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Event" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Event" type="CoreNET.Common.BO.EventControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Event">
+        <result property="Tgllog" column="TGLLOG"/>
+        <result property="Computer_name" column="COMPUTER_NAME"/>
+        <result property="Computer_ip" column="COMPUTER_IP"/>
+        <result property="App_name" column="APP_NAME"/>
+        <result property="Userid" column="USERID"/>
+        <result property="User_db" column="USER_DB"/>
+        <result property="User_app" column="USER_APP"/>
+        <result property="User_menu" column="USER_MENU"/>
+        <result property="Kdtype" column="KDTYPE"/>
+        <result property="Logdata" column="LOGDATA"/>
+        <result property="Idlog" column="IDLOG"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertEvent" parameterMap="insert-param">
+        <generate table="Event"/>
+      </insert>
+      <update id="UpdateByEvent" parameterMap="update-param">
+        <generate table="Event" by="IDLOG"/>
+      </update>
+      <delete id="DeleteByEvent" parameterMap="delete-param">
+        <generate table="Event" by="IDLOG"/>
+      </delete>
+      <select id="BaseQueryEvent" parameterClass="Event" resultMap="return-result">
+        select rtrim(L.IDLOG) as IDLOG,L.TGLLOG,rtrim(L.COMPUTER_NAME) as COMPUTER_NAME
+        ,rtrim(L.COMPUTER_IP) as COMPUTER_IP,rtrim(L.USERID) as USERID,
+        rtrim(L.APP_NAME) as APP_NAME
+        ,rtrim(L.USER_DB) as USER_DB
+        ,rtrim(L.USER_APP) as USER_APP
+        ,rtrim(L.USER_NAME) as USER_NAME
+        ,L.KDTYPE,rtrim(L.LOGDATA) as LOGDATA
+        from EVENT L
+      </select>
+      <select id="QueryByAllEvent" extends="BaseQueryEvent" parameterClass="Event" resultMap="return-result">
+        where 1=1
+        order by L.IDLOG
+      </select>
+      <select id="LoadByPKEvent" extends="BaseQueryEvent" parameterClass="Event" resultMap="return-result">
+        where L.IDLOG = #Idlog#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Event">
+        <parameter property="Tgllog" column="TGLLOG"/>
+        <parameter property="Computer_name" column="COMPUTER_NAME"/>
+        <parameter property="Computer_ip" column="COMPUTER_IP"/>
+        <parameter property="App_name" column="APP_NAME"/>
+        <parameter property="Userid" column="USERID"/>
+        <parameter property="User_db" column="USER_DB"/>
+        <parameter property="User_app" column="USER_APP"/>
+        <parameter property="User_menu" column="USER_MENU"/>
+        <parameter property="Kdtype" column="KDTYPE"/>
+        <parameter property="Logdata" column="LOGDATA"/>
+        <parameter property="Idlog" column="IDLOG"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Event">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Event">
+        <parameter property="Idlog" column="IDLOG"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ssappconfig" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ssappconfig" type="CoreNET.Common.BO.SsappconfigControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ssappconfig">
+        <result property="Value" column="VALUE"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Par" column="PAR"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSsappconfig" parameterMap="insert-param">
+        <generate table="Ssappconfig"/>
+      </insert>
+      <update id="UpdateBySsappconfig" parameterMap="update-param">
+        <generate table="Ssappconfig" by="IDAPP,PAR"/>
+      </update>
+      <update id="UpdateByValidRevSsappconfig" parameterClass="Ssappconfig">
+        update SS00APPCONFIG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSsappconfig" parameterClass="Ssappconfig">
+        update SS00APPCONFIG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySsappconfig" parameterMap="delete-param">
+        <generate table="Ssappconfig" by="IDAPP,PAR"/>
+      </delete>
+      <select id="BaseQuerySsappconfig" parameterClass="Ssappconfig" resultMap="return-result">
+        select rtrim(S.IDAPP) as IDAPP,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPCONFIG S
+      </select>
+      <select id="QueryByAllSsappconfig" extends="BaseQuerySsappconfig" parameterClass="Ssappconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.PAR
+      </select>
+      <select id="QueryByLookupSsappconfig" extends="BaseQuerySsappconfig" parameterClass="Ssappconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.PAR
+      </select>
+      <select id="LoadByPKSsappconfig" extends="BaseQuerySsappconfig" parameterClass="Ssappconfig" resultMap="return-result">
+        where S.IDAPP = #Idapp# and S.PAR = #Par#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ssappconfig">
+        <parameter property="Value" column="VALUE"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ssappconfig">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ssappconfig">
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Par" column="PAR"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

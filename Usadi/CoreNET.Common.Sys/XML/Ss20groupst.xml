@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss20groupst" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss20groupst" type="CoreNET.Common.BO.Ss20groupstControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss20groupst">
+        <result property="Idgroup" column="IDGROUP"/>
+        <result property="Nost" column="NOST"/>
+        <result property="Tglst" column="TGLST"/>
+        <result property="Tglawal" column="TGLAWAL"/>
+        <result property="Tglakhir" column="TGLAKHIR"/>
+        <result property="Sturaian" column="STURAIAN"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idst" column="IDST"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs20groupst" parameterMap="insert-param">
+        <generate table="Ss20groupst"/>
+      </insert>
+      <update id="UpdateBySs20groupst" parameterMap="update-param">
+        <generate table="Ss20groupst" by="IDST"/>
+      </update>
+      <update id="UpdateByValidRevSs20groupst" parameterClass="Ss20groupst">
+        update SS20GROUPST set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs20groupst" parameterClass="Ss20groupst">
+        update SS20GROUPST set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs20groupst" parameterMap="delete-param">
+        <generate table="Ss20groupst" by="IDST"/>
+      </delete>
+      <select id="BaseQuerySs20groupst" parameterClass="Ss20groupst" resultMap="return-result">
+        select rtrim(S.IDST) as IDST,rtrim(S.IDGROUP) as IDGROUP,rtrim(S.NOST) as NOST,S.TGLST,S.TGLAWAL,S.TGLAKHIR,rtrim(S.STURAIAN) as STURAIAN,S.STATUS,rtrim(S.LAST_BY) as LAST_BY,S.LAST_DATE
+        from SS20GROUPST S
+      </select>
+      <select id="QueryByAllSs20groupst" extends="BaseQuerySs20groupst" parameterClass="Ss20groupst" resultMap="return-result">
+        where 1=1
+        order by S.IDST
+      </select>
+      <select id="QueryByLookupSs20groupst" extends="BaseQuerySs20groupst" parameterClass="Ss20groupst" resultMap="return-result">
+        where 1=1
+        order by S.IDST
+      </select>
+      <select id="LoadByPKSs20groupst" extends="BaseQuerySs20groupst" parameterClass="Ss20groupst" resultMap="return-result">
+        where S.IDST = #Idst#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss20groupst">
+        <parameter property="Idgroup" column="IDGROUP"/>
+        <parameter property="Nost" column="NOST"/>
+        <parameter property="Tglst" column="TGLST"/>
+        <parameter property="Tglawal" column="TGLAWAL"/>
+        <parameter property="Tglakhir" column="TGLAKHIR"/>
+        <parameter property="Sturaian" column="STURAIAN"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idst" column="IDST"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss20groupst">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss20groupst">
+        <parameter property="Idst" column="IDST"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

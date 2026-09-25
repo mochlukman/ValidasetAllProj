@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmdok" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmdok" type="CoreNET.Common.BO.DmdokControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmdok">
+        <result property="Nmdok" column="NMDOK"/>
+        <result property="Lbldok" column="LBLDOK"/>
+        <result property="Kdpersppkd" column="KDPERSPPKD"/>
+        <result property="Kdpersskpd" column="KDPERSSKPD"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Kddok" column="KDDOK"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmdok" parameterMap="insert-param">
+        <generate table="Dmdok"/>
+      </insert>
+      <update id="UpdateByDmdok" parameterMap="update-param">
+        <generate table="Dmdok" by="KDDOK"/>
+      </update>
+      <update id="UpdateByValidRevDmdok" parameterClass="Dmdok">
+        update DMDOK set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevDmdok" parameterClass="Dmdok">
+        update DMDOK set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteByDmdok" parameterMap="delete-param">
+        <generate table="Dmdok" by="KDDOK"/>
+      </delete>
+      <select id="BaseQueryDmdok" parameterClass="Dmdok" resultMap="return-result">
+        select rtrim(D.KDDOK) as KDDOK,rtrim(D.NMDOK) as NMDOK,rtrim(D.LBLDOK) as LBLDOK,rtrim(D.KDPERSPPKD) as KDPERSPPKD,rtrim(D.KDPERSSKPD) as KDPERSSKPD,D.STATUS,D.KDLEVEL,rtrim(D.TYPE) as TYPE,rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMDOK D
+      </select>
+      <select id="QueryByAllDmdok" extends="BaseQueryDmdok" parameterClass="Dmdok" resultMap="return-result">
+        where 1=1
+        order by D.KDDOK
+      </select>
+      <select id="QueryByLookupDmdok" extends="BaseQueryDmdok" parameterClass="Dmdok" resultMap="return-result">
+        where 1=1
+        order by D.KDDOK
+      </select>
+      <select id="LoadByPKDmdok" extends="BaseQueryDmdok" parameterClass="Dmdok" resultMap="return-result">
+        where D.KDDOK = #Kddok#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmdok">
+        <parameter property="Nmdok" column="NMDOK"/>
+        <parameter property="Lbldok" column="LBLDOK"/>
+        <parameter property="Kdpersppkd" column="KDPERSPPKD"/>
+        <parameter property="Kdpersskpd" column="KDPERSSKPD"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+        <parameter property="Type" column="TYPE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Kddok" column="KDDOK"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmdok">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmdok">
+        <parameter property="Kddok" column="KDDOK"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

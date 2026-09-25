@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmstatus" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmstatus" type="CoreNET.Common.BO.DmstatusControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmstatus">
+        <result property="Statusicon" column="STATUSICON"/>
+        <result property="Nmstatus" column="NMSTATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idstatus" column="IDSTATUS"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmstatus" parameterMap="insert-param">
+        <generate table="DMSTATUS"/>
+      </insert>
+      <update id="UpdateByDmstatus" parameterMap="update-param">
+        <generate table="DMSTATUS" by="STATUS"/>
+      </update>
+      <update id="UpdateByValidRevDmstatus" parameterClass="Dmstatus">
+        update DMSTATUS set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevDmstatus" parameterClass="Dmstatus">
+        update DMSTATUS set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteByDmstatus" parameterMap="delete-param">
+        <generate table="Dmstatus" by="STATUS"/>
+      </delete>
+      <select id="BaseQueryDmstatus" parameterClass="Dmstatus" resultMap="return-result">
+        select D.IDSTATUS,rtrim(D.NMSTATUS) as NMSTATUS,rtrim(D.STATUSICON) as STATUSICON
+        ,rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMSTATUS D
+      </select>
+      <select id="QueryByAllDmstatus" extends="BaseQueryDmstatus" parameterClass="Dmstatus" resultMap="return-result">
+        where 1=1
+        order by D.IDSTATUS
+      </select>
+      <select id="QueryByLookupDmstatus" extends="BaseQueryDmstatus" parameterClass="Dmstatus" resultMap="return-result">
+        where 1=1
+        order by D.IDSTATUS
+      </select>
+      <select id="LoadByPKDmstatus" extends="BaseQueryDmstatus" parameterClass="Dmstatus" resultMap="return-result">
+        where D.IDSTATUS = #Status#
+      </select>
+      <select id="LoadByNmstatusDmstatus" extends="BaseQueryDmstatus" parameterClass="Dmstatus" resultMap="return-result">
+        where D.NMSTATUS = #Nmstatus#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmstatus">
+        <parameter property="Statusicon" column="STATUSICON"/>
+        <parameter property="Nmstatus" column="NMSTATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Status" column="STATUS"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmstatus">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmstatus">
+        <parameter property="Status" column="STATUS"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

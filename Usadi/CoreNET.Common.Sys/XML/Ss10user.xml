@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss10user" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss10user" type="CoreNET.Common.BO.Ss10userLoginControl, CoreNET.Common.Sys" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss10user">
+        <result property="Userpwd" column="USERPWD"/>
+        <result property="Kdpemda" column="KDPEMDA"/>
+        <result property="Nmpemda" column="NMPEMDA"/>
+        <result property="Usertype" column="USERTYPE"/>
+        <result property="Usernama" column="USERNAMA"/>
+        <result property="Userblock" column="USERBLOCK"/>
+        <result property="Userno" column="USERNO"/>
+        <result property="Usernip" column="USERNIP"/>
+        <result property="Userhp" column="USERHP"/>
+        <result property="Useremail" column="USEREMAIL"/>
+        <result property="Useruraian" column="USERURAIAN"/>
+        <result property="Userstatus" column="USERSTATUS"/>
+        <result property="Userket" column="USERKET"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Statusname" column="STATUSNAME"/>
+        <result property="Statusicon" column="STATUSICON"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Userid" column="USERID"/>
+      </resultMap>
+      <resultMap id="return-result-pwd" extends="return-result" class="Ss10user">
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Userpwd" column="USERPWD"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs10user" parameterMap="insert-param">
+        <generate table="Ss10user"/>
+      </insert>
+      <update id="UpdateBySs10user" parameterMap="update-param">
+        <generate table="Ss10user" by="USERID"/>
+      </update>
+      <update id="UpdateByPwdSs10user" parameterClass="Ss10user">
+        update SS10USER set USERPWD=#Userpwd#,USERKET=#Userket#
+        where USERID = #Userid#
+      </update>
+      <delete id="DeleteBySs10user" parameterMap="delete-param">
+        <generate table="Ss10user" by="USERID"/>
+      </delete>
+      <select id="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        select rtrim(S.USERID) as USERID,rtrim(S.USERTYPE) as USERTYPE
+        ,rtrim(S.USERNAMA) as USERNAMA,rtrim(S.USERNIP) as USERNIP,rtrim(S.USERHP) as USERHP
+        ,rtrim(S.USEREMAIL) as USEREMAIL,rtrim(S.USERURAIAN) as USERURAIAN
+        ,rtrim(S.USERBLOCK) as USERBLOCK,rtrim(S.USERPWD) as USERPWD,S.USERNO
+        ,S.USERSTATUS,rtrim(S.USERKET) as USERKET
+        ,rtrim(S.KDPEMDA) as KDPEMDA,rtrim(P.NMPEMDA) as NMPEMDA
+        ,S.STATUS,D.NMSTATUS as STATUSNAME,D.STATUSICON
+        ,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS10USER S
+        left outer join DMPEMDA P on S.KDPEMDA=P.KDPEMDA
+        left outer join DMSTATUS D on S.STATUS=D.IDSTATUS
+      </select>
+      <select id="QueryByAllSs10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and S.KDPEMDA = #Kdpemda#
+        order by S.USERID
+      </select>
+      <select id="QueryByLookupSs10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and (S.KDPEMDA = #Kdpemda# or isnull(#Kdpemda#,'')='' )
+        order by S.USERID
+      </select>
+      <!--Dipakai di Ss10userappControl.GetProperties() baris 26-27 -->
+      <select id="QueryByLookupByAppSs10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and S.USERID not in (select USERID from SS10USERAPP where IDAPP=#Idapp#)
+        and S.KDPEMDA=#Kdpemda#
+        order by S.USERID
+      </select>
+      <select id="QueryByDm101Ss10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and S.USERID not in (select USERID from SS10USERAPP where IDAPP=#Idapp#)
+        order by S.USERID
+      </select>
+      <select id="QueryByDmSs10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and S.USERID not in (select USERID from SIPD01DM.dbo.DMUSER where KDPEMDA=#Kdpemda#)
+        order by S.USERID
+      </select>
+      <select id="QueryByDm103Ss10user" extends="BaseQuerySs10user" parameterClass="Ss10user" resultMap="return-result">
+        where 1=1
+        and S.USERID not in (select USERID from SIPD01DM.dbo.DM103USER where IDUNIT=#Idunit#)
+        order by S.USERID
+      </select>
+      <select id="LoadByIDSs10user" parameterClass="Ss10user" resultMap="return-result-pwd">
+        select #Idapp# as IDAPP,rtrim(S.USERID) as USERID,rtrim(S.USERPWD) as USERPWD
+        ,rtrim(S.USERTYPE) as USERTYPE,rtrim(S.USERNAMA) as USERNAMA,rtrim(S.USERKET) as USERKET
+        ,rtrim(S.USERBLOCK) as USERBLOCK,rtrim(S.USERNIP) as USERNIP,rtrim(S.USERHP) as USERHP
+        ,rtrim(S.USEREMAIL) as USEREMAIL,S.USERNO
+        ,rtrim(S.USERURAIAN) as USERURAIAN,S.USERSTATUS
+        ,rtrim(S.KDPEMDA) as KDPEMDA,rtrim(P.NMPEMDA) as NMPEMDA
+        ,S.STATUS,D.NMSTATUS as STATUSNAME,D.STATUSICON
+        ,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS10USER S
+        left outer join DMPEMDA P on S.KDPEMDA=P.KDPEMDA
+        left outer join DMSTATUS D on S.STATUS=D.IDSTATUS
+        where 1=1
+        and S.USERID = #Userid#
+      </select>
+      <select id="LoadByPKSs10user" parameterClass="Ss10user" resultMap="return-result-pwd">
+        select #Idapp# as IDAPP,rtrim(S.USERID) as USERID,rtrim(S.USERPWD) as USERPWD
+        ,rtrim(S.USERTYPE) as USERTYPE,rtrim(S.USERNAMA) as USERNAMA,rtrim(S.USERKET) as USERKET
+        ,rtrim(S.USERBLOCK) as USERBLOCK,rtrim(S.USERNIP) as USERNIP,rtrim(S.USERHP) as USERHP
+        ,rtrim(S.USEREMAIL) as USEREMAIL,S.USERNO
+        ,rtrim(S.USERURAIAN) as USERURAIAN,S.USERSTATUS
+        ,rtrim(S.KDPEMDA) as KDPEMDA,rtrim(P.NMPEMDA) as NMPEMDA
+        ,S.STATUS,D.NMSTATUS as STATUSNAME,D.STATUSICON
+        ,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS10USER S
+        left outer join DMPEMDA P on S.KDPEMDA=P.KDPEMDA
+        left outer join DMSTATUS D on S.STATUS=D.IDSTATUS
+        where S.USERID = #Userid#
+        and (isnull(#Idapp#,'')='' or S.USERID in (select USERID from SS10USERAPP where IDAPP=#Idapp#))
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss10user">
+        <parameter property="Kdpemda" column="KDPEMDA"/>
+        <parameter property="Usertype" column="USERTYPE"/>
+        <parameter property="Usernama" column="USERNAMA"/>
+        <parameter property="Userblock" column="USERBLOCK"/>
+        <parameter property="Usernip" column="USERNIP"/>
+        <parameter property="Userhp" column="USERHP"/>
+        <parameter property="Useremail" column="USEREMAIL"/>
+        <parameter property="Userno" column="USERNO"/>
+        <parameter property="Useruraian" column="USERURAIAN"/>
+        <parameter property="Userstatus" column="USERSTATUS"/>
+        <parameter property="Userket" column="USERKET"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Userid" column="USERID"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss10user">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss10user">
+        <parameter property="Userid" column="USERID"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

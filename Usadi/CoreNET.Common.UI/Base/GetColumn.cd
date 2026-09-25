@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CoreNET.Common.Base.Fields">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAgAAAEBAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Fields.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoreNET.Common.Base.MyBoundField">
+    <Position X="3.5" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAIAAAgiAIgIAEAAAAQAFBQCQAIOAAAAgAACBAAIAAI=</HashCode>
+      <FileName>UI\Fields.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoreNET.Common.Base.ViewListProperties">
+    <Position X="6.25" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>LllAUQylUARwqnZAlaCsBqXGKdeO4hdQmSIVk4iIBR4=</HashCode>
+      <FileName>UI\ViewListProperties.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

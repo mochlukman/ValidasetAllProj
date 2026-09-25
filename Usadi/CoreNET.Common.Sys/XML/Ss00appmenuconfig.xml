@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss00appmenuconfig" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss00appmenuconfig" type="CoreNET.Common.BO.Ss00appmenuconfigControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss00appmenuconfig">
+        <result property="Par" column="PAR"/>
+        <result property="Value" column="VALUE"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idmenu" column="IDMENU"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs00appmenuconfig" parameterMap="insert-param">
+        <generate table="Ss00appmenuconfig"/>
+      </insert>
+      <update id="UpdateBySs00appmenuconfig" parameterMap="update-param">
+        <generate table="Ss00appmenuconfig" by="IDMENU"/>
+      </update>
+      <update id="UpdateByValidRevSs00appmenuconfig" parameterClass="Ss00appmenuconfig">
+        update SS00APPMENUCONFIG set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs00appmenuconfig" parameterClass="Ss00appmenuconfig">
+        update SS00APPMENUCONFIG set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs00appmenuconfig" parameterMap="delete-param">
+        <generate table="Ss00appmenuconfig" by="IDMENU"/>
+      </delete>
+      <select id="BaseQuerySs00appmenuconfig" parameterClass="Ss00appmenuconfig" resultMap="return-result">
+        select rtrim(S.IDMENU) as IDMENU,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPMENUCONFIG S
+        union
+        select rtrim(S.IDMENU) as IDMENU,rtrim(S.PAR) as PAR,rtrim(S.VALUE) as VALUE,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS01APPMENUCONFIG S
+      </select>
+      <select id="QueryByAllSs00appmenuconfig" extends="BaseQuerySs00appmenuconfig" parameterClass="Ss00appmenuconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDMENU
+      </select>
+      <select id="QueryByLookupSs00appmenuconfig" extends="BaseQuerySs00appmenuconfig" parameterClass="Ss00appmenuconfig" resultMap="return-result">
+        where 1=1
+        order by S.IDMENU
+      </select>
+      <select id="LoadByPKSs00appmenuconfig" extends="BaseQuerySs00appmenuconfig" parameterClass="Ss00appmenuconfig" resultMap="return-result">
+        where S.IDMENU = #Idmenu#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss00appmenuconfig">
+        <parameter property="Par" column="PAR"/>
+        <parameter property="Value" column="VALUE"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idmenu" column="IDMENU"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss00appmenuconfig">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss00appmenuconfig">
+        <parameter property="Idmenu" column="IDMENU"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

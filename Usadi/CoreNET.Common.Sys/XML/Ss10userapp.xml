@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss10userapp" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss10userapp" type="CoreNET.Common.BO.Ss10userControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss10userapp">
+        <result property="Kdapp" column="KDAPP"/>
+        <result property="Nmapp" column="NMAPP"/>
+        <result property="Usertype" column="USERTYPE"/>
+        <result property="Usernama" column="USERNAMA"/>
+        <result property="Userblock" column="USERBLOCK"/>
+        <result property="Usernip" column="USERNIP"/>
+        <result property="Userhp" column="USERHP"/>
+        <result property="Useremail" column="USEREMAIL"/>
+        <result property="Userno" column="USERNO"/>
+        <result property="Useruraian" column="USERURAIAN"/>
+        <result property="Userstatus" column="USERSTATUS"/>
+        <result property="Userket" column="USERKET"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Userid" column="USERID"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs10userapp" parameterMap="insert-param">
+        <generate table="Ss10userapp"/>
+      </insert>
+      <update id="UpdateBySs10userapp" parameterMap="update-param">
+        <generate table="Ss10userapp" by="IDAPP,USERID"/>
+      </update>
+      <update id="UpdateByValidRevSs10userapp" parameterClass="Ss10userapp">
+        update SS10USERAPP set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevSs10userapp" parameterClass="Ss10userapp">
+        update SS10USERAPP set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs10userapp" parameterMap="delete-param">
+        <generate table="Ss10userapp" by="IDAPP,USERID"/>
+      </delete>
+      <select id="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        select rtrim(S.IDAPP) as IDAPP,rtrim(S.USERID) as USERID
+        ,rtrim(A.KDAPP) as KDAPP,rtrim(A.NMAPP) as NMAPP
+        ,rtrim(U.USERTYPE) as USERTYPE,rtrim(U.USERNAMA) as USERNAMA
+        ,rtrim(U.USERBLOCK) as USERBLOCK,rtrim(U.USERNIP) as USERNIP
+        ,rtrim(U.USERHP) as USERHP,rtrim(U.USEREMAIL) as USEREMAIL,U.USERNO
+        ,rtrim(U.USERURAIAN) as USERURAIAN,U.USERSTATUS,rtrim(U.USERKET) as USERKET
+        ,S.STATUS,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS10USERAPP S
+        inner join SS10USER U on S.USERID=U.USERID
+        inner join SS00APP A on S.IDAPP=A.IDAPP
+      </select>
+      <select id="QueryByAllSs10userapp" extends="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        where 1=1
+        and S.IDAPP=#Idapp#
+      </select>
+      <select id="QueryByAppSs10userapp" extends="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        where 1=1
+        and S.IDAPP=#Idapp#
+      </select>
+      <select id="QueryByUserSs10userapp" extends="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        where 1=1
+        and S.USERID=#Userid#
+        and A.TYPE='D'
+      </select>
+      <select id="QueryByLookupSs10userapp" extends="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        where 1=1
+        order by S.IDAPP,S.USERID
+      </select>
+      <select id="LoadByPKSs10userapp" extends="BaseQuerySs10userapp" parameterClass="Ss10userapp" resultMap="return-result">
+        where S.IDAPP = #Idapp# and S.USERID = #Userid#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss10userapp">
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Userid" column="USERID"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Ss10userapp">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss10userapp">
+        <parameter property="Idapp" column="IDAPP"/>
+        <parameter property="Userid" column="USERID"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

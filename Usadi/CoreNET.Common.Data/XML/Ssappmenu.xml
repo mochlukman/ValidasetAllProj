@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ssappmenu" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ssappmenu" type="CoreNET.Common.BO.SsappmenuControl, CoreNET.Common.Data" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ssappmenu">
+        <result property="Nmmenu" column="NMMENU"/>
+        <result property="Idmenu" column="IDMENU"/>
+        <result property="Url" column="URL"/>
+        <result property="UrlFull" column="URLFULL"/>
+        <result property="Olist1" column="OLIST1"/>
+        <result property="Olistdetil1" column="OLISTDETIL1"/>
+        <result property="Olistdetil2" column="OLISTDETIL2"/>
+        <result property="Olistdetil3" column="OLISTDETIL3"/>
+        <result property="Olistdetil4" column="OLISTDETIL4"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idapp" column="IDAPP"/>
+        <result property="Kdmenu" column="KDMENU"/>
+      </resultMap>
+      <resultMap id="return-result-olist1" class="Ssappmenu">
+        <result property="Kdmenu" column="KDMENU"/>
+        <result property="Nmmenu" column="NMMENU"/>
+        <result property="Idmenu" column="IDMENU"/>
+        <result property="Olist1" column="OLIST1"/>
+        <result property="Olistdetil1" column="OLISTDETIL1"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <select id="QueryByAllSsappmenu" parameterClass="Ssappmenu" resultMap="return-result">
+        select rtrim(S.IDAPP) as IDAPP,rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,rtrim(S.IDMENU) as IDMENU,
+        rtrim(S.URL) as URL,
+        rtrim(S.URL)+'app='+S.IDAPP+'&amp;id='+IDMENU as URLFULL,
+        rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+        rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPMENU S
+        union
+        select rtrim(S.IDAPP) as IDAPP,rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,rtrim(S.IDMENU) as IDMENU,
+        rtrim(S.URL) as URL,
+        rtrim(S.URL)+'app='+S.IDAPP+'&amp;id='+IDMENU as URLFULL,
+        rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+        rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS01APPMENU S
+      </select>
+      <select id="QueryByAllOlist1Ssappmenu" parameterClass="Ssappmenu" resultMap="return-result-olist1">
+        select rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,rtrim(S.IDMENU) as IDMENU,
+        rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+        rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS00APPMENU S
+        union
+        select rtrim(S.KDMENU) as KDMENU,rtrim(S.NMMENU) as NMMENU,rtrim(S.IDMENU) as IDMENU,
+        rtrim(S.OLIST1) as OLIST1,rtrim(S.OLISTDETIL1) as OLISTDETIL1,rtrim(S.OLISTDETIL2) as OLISTDETIL2,
+        rtrim(S.OLISTDETIL3) as OLISTDETIL3,rtrim(S.OLISTDETIL4) as OLISTDETIL4,
+        S.STATUS,S.KDLEVEL,rtrim(S.TYPE) as TYPE,rtrim(isnull(S.LAST_BY,'')) as LAST_BY,S.LAST_DATE
+        from SS01APPMENU S
+      </select>
+    </statements>
+    <parameterMaps>
+    </parameterMaps>
+</sqlMap>
+

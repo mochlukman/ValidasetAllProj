@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Ss01appmenukkp" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Ss01appmenukkp" type="CoreNET.Common.BO.Ss01appmenukkpControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Ss01appmenukkp">
+        <result property="Lastnodok" column="LASTNODOK"/>
+        <result property="Nodok" column="NODOK"/>
+        <result property="Nfiles" column="NFILES"/>
+        <result property="Statusicon" column="STATUSICON"/>
+        <result property="Progress" column="PROGRESS"/>
+        <result property="Urdok" column="URDOK"/>
+        <result property="Kddok" column="KDDOK"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Cre_by" column="CRE_BY"/>
+        <result property="Cre_date" column="CRE_DATE"/>
+        <result property="Mod_by" column="MOD_BY"/>
+        <result property="Mod_date" column="MOD_DATE"/>
+        <result property="Rev_by" column="REV_BY"/>
+        <result property="Rev_date" column="REV_DATE"/>
+        <result property="App_by" column="APP_BY"/>
+        <result property="App_date" column="APP_DATE"/>
+        <result property="Sign_by" column="SIGN_BY"/>
+        <result property="Sign_date" column="SIGN_DATE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Idmenu" column="IDMENU"/>
+        <result property="Iddok" column="IDDOK"/>
+      </resultMap>
+      <resultMap id="return-result-last" class="Ss01appmenukkp">
+        <result property="Nodok" column="NODOK"/>
+        <result property="Iddok" column="IDDOK"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertSs01appmenukkp" parameterMap="insert-param">
+        <generate table="Ss01appmenukkp"/>
+      </insert>
+      <update id="UpdateBySs01appmenukkp" parameterMap="update-param">
+        <generate table="Ss01appmenukkp" by="IDMENU,IDDOK"/>
+      </update>
+      <update id="UpdateByValidRevSs01appmenukkp" parameterClass="Ss01appmenukkp">
+        update SS01APPMENUKKP set REV_BY=#Rev_by# and REV_DATE=#Rev_date# and LAST_BY=#Last_by# and LAST_DATE=#Last_date#
+      </update>
+      <update id="UpdateByUnValidRevSs01appmenukkp" parameterClass="Ss01appmenukkp">
+        update SS01APPMENUKKP set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteBySs01appmenukkp" parameterMap="delete-param">
+        <generate table="Ss01appmenukkp" by="IDMENU,IDDOK"/>
+      </delete>
+      <select id="BaseQuerySs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result">
+        select rtrim(P2.NODOK) as LASTNODOK,rtrim(P.IDMENU) as IDMENU,rtrim(P.IDDOK) as IDDOK,
+        rtrim(P.NODOK) as NODOK,P.NFILES,rtrim(P.STATUSICON) as STATUSICON,P.PROGRESS,
+        rtrim(P.URDOK) as URDOK,rtrim(P.KDDOK) as KDDOK,P.STATUS,
+        rtrim(P.CRE_BY) as CRE_BY,P.CRE_DATE,rtrim(P.MOD_BY) as MOD_BY,P.MOD_DATE,rtrim(P.REV_BY) as REV_BY,P.REV_DATE,
+        rtrim(P.APP_BY) as APP_BY,P.APP_DATE,rtrim(P.SIGN_BY) as SIGN_BY,P.SIGN_DATE,rtrim(P.LAST_BY) as LAST_BY,P.LAST_DATE
+        from SS01APPMENUKKP P
+        inner join
+        (
+        select top 1 IDMENU,NODOK from SS01APPMENUKKP
+        where 1=1
+        and IDMENU=#Idmenu# and left(NODOK,len(#Nodok#))=#Nodok#
+        order by NODOK desc
+        )P2 on P.IDMENU=P2.IDMENU
+      </select>
+      <select id="QueryByAllSs01appmenukkp" extends="BaseQuerySs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result">
+        where 1=1
+        and P.IDMENU=#Idmenu# and left(P.NODOK,len(#Nodok#))=#Nodok#
+        order by P.NODOK
+      </select>
+      <select id="QueryByLookupSs01appmenukkp" extends="BaseQuerySs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result">
+        where 1=1
+        order by P.IDMENU,P.IDDOK
+      </select>
+      <select id="QueryByFilterSs01appmenukkp" extends="BaseQuerySs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result">
+        where 1=1
+        and IDMENU=#Idmenu# and left(P.NODOK,len(#Nodok#))=#Nodok#
+        order by P.IDMENU,P.IDDOK
+      </select>
+      <select id="QueryByLastSs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result-last">
+        select top 1 P.IDDOK,rtrim(P.NODOK) as NODOK
+        from SS01APPMENUKKP P
+        where 1=1
+        and IDMENU=#Idmenu# and left(P.NODOK,len(#Nodok#))=#Nodok#
+        order by P.NODOK desc
+      </select>
+      <select id="LoadByPKSs01appmenukkp" extends="BaseQuerySs01appmenukkp" parameterClass="Ss01appmenukkp" resultMap="return-result">
+        where P.IDMENU = #Idmenu# and P.IDDOK = #Iddok#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Ss01appmenukkp">
+        <parameter property="Nodok" column="NODOK"/>
+        <parameter property="Urdok" column="URDOK"/>
+        <parameter property="Kddok" column="KDDOK"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Cre_by" column="CRE_BY"/>
+        <parameter property="Cre_date" column="CRE_DATE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idmenu" column="IDMENU"/>
+        <parameter property="Iddok" column="IDDOK"/>
+      </parameterMap>
+      <parameterMap id="update-param" class="Ss01appmenukkp">
+        <parameter property="Nodok" column="NODOK"/>
+        <parameter property="Nfiles" column="NFILES"/>
+        <parameter property="Statusicon" column="STATUSICON"/>
+        <parameter property="Progress" column="PROGRESS"/>
+        <parameter property="Urdok" column="URDOK"/>
+        <parameter property="Kddok" column="KDDOK"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Mod_by" column="MOD_BY"/>
+        <parameter property="Mod_date" column="MOD_DATE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Idmenu" column="IDMENU"/>
+        <parameter property="Iddok" column="IDDOK"/>
+      </parameterMap>
+      <parameterMap id="delete-param" class="Ss01appmenukkp">
+        <parameter property="Idmenu" column="IDMENU"/>
+        <parameter property="Iddok" column="IDDOK"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

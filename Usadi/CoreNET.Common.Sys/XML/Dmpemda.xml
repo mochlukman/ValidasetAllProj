@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Dmpemda" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Dmpemda" type="CoreNET.Common.BO.DmpemdaControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Dmpemda">
+        <result property="Satker" column="SATKER"/>
+        <result property="Nmpemda" column="NMPEMDA"/>
+        <result property="Urpemda" column="URPEMDA"/>
+        <result property="Akropemda" column="AKROPEMDA"/>
+        <result property="Almtpemda" column="ALMTPEMDA"/>
+        <result property="Tlpnpemda" column="TLPNPEMDA"/>
+        <result property="Webpemda" column="WEBPEMDA"/>
+        <result property="Emailpemda" column="EMAILPEMDA"/>
+        <result property="Kdblok" column="KDBLOK"/>
+        <result property="Tglawal" column="TGLAWAL"/>
+        <result property="Tglakhir" column="TGLAKHIR"/>
+        <result property="Aktif" column="AKTIF"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Kdlevel" column="KDLEVEL"/>
+        <result property="Type" column="TYPE"/>
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Kdpemda" column="KDPEMDA"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertDmpemda" parameterMap="insert-param">
+        <generate table="Dmpemda"/>
+      </insert>
+      <update id="UpdateByDmpemda" parameterMap="update-param">
+        <generate table="Dmpemda" by="KDPEMDA"/>
+      </update>
+      <update id="UpdateByValidRevDmpemda" parameterClass="Dmpemda">
+        update DMPEMDA set REV_BY=#Rev_by# and REV_DATE=#Rev_date#
+      </update>
+      <update id="UpdateByUnValidRevDmpemda" parameterClass="Dmpemda">
+        update DMPEMDA set REV_BY='' and REV_DATE=null
+      </update>
+      <delete id="DeleteByDmpemda" parameterMap="delete-param">
+        <generate table="Dmpemda" by="KDPEMDA"/>
+      </delete>
+      <select id="BaseQueryDmpemda" parameterClass="Dmpemda" resultMap="return-result">
+        select rtrim(D.KDPEMDA) as KDPEMDA,rtrim(D.SATKER) as SATKER,
+        rtrim(D.NMPEMDA) as NMPEMDA,rtrim(D.URPEMDA) as URPEMDA,rtrim(D.AKROPEMDA) as AKROPEMDA,
+        rtrim(D.ALMTPEMDA) as ALMTPEMDA,rtrim(D.TLPNPEMDA) as TLPNPEMDA,rtrim(D.WEBPEMDA) as WEBPEMDA,
+        rtrim(D.EMAILPEMDA) as EMAILPEMDA,rtrim(D.KDBLOK) as KDBLOK,
+        D.TGLAWAL,D.TGLAKHIR,D.AKTIF,D.STATUS,D.KDLEVEL,rtrim(D.TYPE) as TYPE,
+        rtrim(D.LAST_BY) as LAST_BY,D.LAST_DATE
+        from DMPEMDA D
+      </select>
+      <select id="QueryByAllDmpemda" extends="BaseQueryDmpemda" parameterClass="Dmpemda" resultMap="return-result">
+        where 1=1
+        order by D.KDPEMDA
+      </select>
+      <select id="QueryByFilterDmpemda" extends="BaseQueryDmpemda" parameterClass="Dmpemda" resultMap="return-result">
+        where 1=1
+        and D.KDPEMDA=#Kdpemda#
+        order by D.KDPEMDA
+      </select>
+      <select id="QueryByLookupDmpemda" extends="BaseQueryDmpemda" parameterClass="Dmpemda" resultMap="return-result">
+        where 1=1
+        order by D.KDPEMDA
+      </select>
+      <select id="LoadByPKDmpemda" extends="BaseQueryDmpemda" parameterClass="Dmpemda" resultMap="return-result">
+        where D.KDPEMDA = #Kdpemda#
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Dmpemda">
+        <parameter property="Satker" column="SATKER"/>
+        <parameter property="Nmpemda" column="NMPEMDA"/>
+        <parameter property="Urpemda" column="URPEMDA"/>
+        <parameter property="Akropemda" column="AKROPEMDA"/>
+        <parameter property="Almtpemda" column="ALMTPEMDA"/>
+        <parameter property="Tlpnpemda" column="TLPNPEMDA"/>
+        <parameter property="Webpemda" column="WEBPEMDA"/>
+        <parameter property="Emailpemda" column="EMAILPEMDA"/>
+        <parameter property="Kdblok" column="KDBLOK"/>
+        <parameter property="Aktif" column="AKTIF"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Kdlevel" column="KDLEVEL"/>
+        <parameter property="Type" column="TYPE"/>
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Kdpemda" column="KDPEMDA"/>
+      </parameterMap>
+      <parameterMap id="update-param" extends="insert-param" class="Dmpemda">
+      </parameterMap>
+      <parameterMap id="delete-param" class="Dmpemda">
+        <parameter property="Kdpemda" column="KDPEMDA"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+

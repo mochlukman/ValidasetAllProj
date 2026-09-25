@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{13DE9AC0-B86E-4B68-AA27-39F102C2BB9D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoreNET.Common.Lib</RootNamespace>
+    <AssemblyName>CoreNET.Common.Lib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>embedded</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BO\BaseBO.cs" />
+    <Compile Include="Base\BaseDataAdapter.cs" />
+    <Compile Include="BO\PropertyMap.cs" />
+    <Compile Include="BO\Param.cs" />
+    <Compile Include="Dashboard\DashboardDataObject.cs" />
+    <Compile Include="Dashboard\DataHelper.cs" />
+    <Compile Include="Dashboard\IDashboard.cs" />
+    <Compile Include="File\FileUtilities.cs" />
+    <Compile Include="Utils\GlobalData.cs" />
+    <Compile Include="Interface\IDataControl.cs" />
+    <Compile Include="Interface\ICanSaveHTML.cs" />
+    <Compile Include="Interface\ICsv.cs" />
+    <Compile Include="Interface\IDataControlAppuser.cs" />
+    <Compile Include="Interface\IDataControlDictionary.cs" />
+    <Compile Include="Interface\IDataControlMenuMapClass.cs" />
+    <Compile Include="Interface\IDataControlText.cs" />
+    <Compile Include="Utils\MasterAppConstants.cs" />
+    <Compile Include="Utils\GlobalLib.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\SoftwareBit2.cs" />
+    <Compile Include="Utils\SQLDataSource.cs" />
+    <Compile Include="Utils\SQLDatasource01.cs" />
+    <Compile Include="Utils\UtilityBO.cs" />
+    <Compile Include="Utils\UtilityLib.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\WSP_BACKUPDB.sql" />
+    <EmbeddedResource Include="SQL\WSP_CompareDB.txt" />
+    <EmbeddedResource Include="SQL\WSP_RESTOREDB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagram\Base.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<PropertyGroup>
+    <PreBuildEvent>subwcrev "$(ProjectDir)." "$(ProjectDir)AssemblyInfoTemplate.cs" "$(ProjectDir)Properties\AssemblyInfo.cs" -f</PreBuildEvent>
+  </PropertyGroup>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

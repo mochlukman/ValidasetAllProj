@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Notes" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <alias>
+      <typeAlias alias="Notes" type="CoreNET.Common.BO.NotesControl" />
+    </alias>
+    <resultMaps>
+      <resultMap id="return-result" class="Notes">
+        <result property="Last_by" column="LAST_BY"/>
+        <result property="Last_date" column="LAST_DATE"/>
+        <result property="Tglnotes" column="TGLNOTES"/>
+        <result property="Refdb" column="REFDB"/>
+        <result property="Reftabel" column="REFTABEL"/>
+        <result property="Refid" column="REFID"/>
+        <result property="Notestype" column="NOTESTYPE"/>
+        <result property="Notes" column="NOTES"/>
+        <result property="Status" column="STATUS"/>
+        <result property="Idnotes" column="IDNOTES"/>
+      </resultMap>
+    </resultMaps>
+    <statements>
+      <insert id="InsertNotes" parameterMap="insert-param">
+        <generate table="Notes"/>
+      </insert>
+      <update id="UpdateByNotes" parameterMap="update-param">
+        <generate table="Notes" by="IDNOTES"/>
+      </update>
+      <delete id="DeleteByNotes" parameterMap="delete-param">
+        <generate table="Notes" by="IDNOTES"/>
+      </delete>
+      <select id="BaseQueryNotes" parameterClass="Notes" resultMap="return-result">
+        select rtrim(L.IDNOTES) as IDNOTES,L.TGLNOTES,rtrim(L.REFDB) as REFDB,rtrim(L.REFTABEL) as REFTABEL,
+        rtrim(L.REFID) as REFID,L.NOTESTYPE,L.NOTES as NOTES,L.STATUS,
+        rtrim(L.LAST_BY) as LAST_BY,L.LAST_DATE
+        from NOTES L
+      </select>
+      <select id="QueryByAllNotes" extends="BaseQueryNotes" parameterClass="Notes" resultMap="return-result">
+        where 1=1
+        and rtrim(isnull(L.REFID,'')) = isnull(#Refid#,'') and rtrim(L.NOTESTYPE) = #Notestype#
+        order by L.IDNOTES
+      </select>
+      <select id="QueryByFilterNotes" parameterClass="Notes" resultMap="return-result">
+        select rtrim(L.IDNOTES) as IDNOTES,L.TGLNOTES,rtrim(L.REFDB) as REFDB,rtrim(L.REFTABEL) as REFTABEL,
+        rtrim(L.REFID) as REFID,L.NOTESTYPE,L.NOTES as NOTES,L.STATUS,
+        rtrim(L.LAST_BY) as LAST_BY,L.LAST_DATE
+        from NOTES L
+        where rtrim(L.REFDB) = #Refdb# and rtrim(L.REFTABEL) = #Reftabel# and rtrim(isnull(L.REFID,'')) = isnull(#Refid#,'') and rtrim(L.NOTESTYPE) = #Notestype#
+        order by L.TGLNOTES desc
+      </select>
+      <select id="LoadByPKNotes" extends="BaseQueryNotes" parameterClass="Notes" resultMap="return-result">
+        where L.IDNOTES = #Idnotes#
+      </select>
+      <select id="LoadByFilterNotes" parameterClass="Notes" resultMap="return-result">
+        select top 1 rtrim(L.IDNOTES) as IDNOTES,L.TGLNOTES,rtrim(L.REFDB) as REFDB,rtrim(L.REFTABEL) as REFTABEL,
+        rtrim(L.REFID) as REFID,L.NOTESTYPE,L.NOTES as NOTES,L.STATUS,
+        rtrim(L.LAST_BY) as LAST_BY,L.LAST_DATE
+        from NOTES L
+        where rtrim(L.REFDB) = #Refdb# and rtrim(L.REFTABEL) = #Reftabel# and rtrim(isnull(L.REFID,'')) = isnull(#Refid#,'') and rtrim(L.NOTESTYPE) = #Notestype#
+        order by L.TGLNOTES desc
+      </select>
+    </statements>
+    <parameterMaps>
+      <parameterMap id="insert-param" class="Notes">
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Tglnotes" column="TGLNOTES"/>
+        <parameter property="Refdb" column="REFDB"/>
+        <parameter property="Reftabel" column="REFTABEL"/>
+        <parameter property="Refid" column="REFID"/>
+        <parameter property="Notestype" column="NOTESTYPE"/>
+        <parameter property="Notes" column="NOTES"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Idnotes" column="IDNOTES"/>
+      </parameterMap>
+      <parameterMap id="update-param" class="Notes">
+        <parameter property="Last_by" column="LAST_BY"/>
+        <parameter property="Last_date" column="LAST_DATE"/>
+        <parameter property="Tglnotes" column="TGLNOTES"/>
+        <parameter property="Refdb" column="REFDB"/>
+        <parameter property="Reftabel" column="REFTABEL"/>
+        <parameter property="Refid" column="REFID"/>
+        <parameter property="Notestype" column="NOTESTYPE"/>
+        <parameter property="Status" column="STATUS"/>
+        <parameter property="Idnotes" column="IDNOTES"/>
+      </parameterMap>
+      <parameterMap id="delete-param" class="Notes">
+        <parameter property="Idnotes" column="IDNOTES"/>
+      </parameterMap>
+    </parameterMaps>
+</sqlMap>
+
